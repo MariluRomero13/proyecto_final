@@ -14,7 +14,7 @@
 //Rutas de login
 Route::get("/", "UsuarioController@mostrarLogin")->name("login");
 Route::post("/iniciarsesion", "UsuarioController@iniciarSesion");
-Route::post("/logout",["middleware" => "verificador", "uses" => "UsuarioController@cerrarSesion"]);
+Route::post("/logout",['middleware' => "verificador", "uses" => "UsuarioController@cerrarSesion"]);
 
 //Rutas de inicio
 Route::get("/inicio",["middleware" => "verificador", "uses" => "PanelController@index"])->name('panel');
