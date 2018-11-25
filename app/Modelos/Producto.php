@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Modelos;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Producto extends Model
+{
+    Protected $table = 'productos';
+	protected $primaryKey = 'id';
+    public $timestamps = false;
+
+    public function categorias()
+    {
+    	return $this->belongsTo(Categoria::class,'id_categoria','id');
+    }
+}

@@ -18,3 +18,17 @@ Route::post("/logout",['middleware' => "verificador", "uses" => "UsuarioControll
 
 //Rutas de inicio
 Route::get("/inicio",["middleware" => "verificador", "uses" => "PanelController@index"])->name('panel');
+
+
+#Rutas De Productos
+//Vistas De Productos
+Route::get("/viewproductos", "ProductosController@verproductos");
+Route::get("/viewregistrarproductos", "ProductosController@viewregistrarproductos");
+//Registrar Productos
+Route::post("/registrarproducto", "ProductosController@registrarproducto");
+Route::get("/altaProducto", "ProductosController@altaProducto");
+//Actualizar Productos
+Route::get("/seleccionarproducto/{id}", "ProductosController@seleccionarproducto");
+Route::post("/actualizarproducto/{id}", "ProductosController@actualizarproducto");
+//Eliminar Productos
+Route::get("/eliminar/{id}", "ProductosController@eliminarproducto");

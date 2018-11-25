@@ -10,6 +10,7 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    @yield('css')
 </head>
 <body>
 	
@@ -36,10 +37,10 @@
                     <a href="#productos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Productos</a>
                     <ul class="collapse list-unstyled" id="productos">
                         <li>
-                            <a href="#">Crear</a>
+                            <a href="{{ url('viewregistrarproductos') }}">Crear</a>
                         </li>
                         <li>
-                            <a href="#">Mostrar</a>
+                            <a href="{{ url('viewproductos') }}">Mostrar</a>
                         </li>
                     </ul>
                     <a href="#inventario" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Inventario</a>
