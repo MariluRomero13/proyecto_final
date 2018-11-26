@@ -71,7 +71,7 @@
 <div class="container">
   @foreach($productos as $pro)
     <div class="card" id="cards">
-      <img class="card-img-top" src="/imagenes/imagenes_productos/{{$pro->imagen}}" alt="Producto" id="imagenes">
+      <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$pro->imagen"}}" alt="Producto" id="imagenes">
       <div class="card-body">
         <h5 class="card-title">{{$pro->nombre}}</h5>
         <p class="card-text">{{$pro->descripcion}}</p>

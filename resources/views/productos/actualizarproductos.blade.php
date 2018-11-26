@@ -42,7 +42,7 @@
               <form action="{{ url('actualizarproducto/$c->id') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
-                <img src="/imagenes/imagenes_productos/{{$c->imagen}}" alt="Producto" id="imagenes">
+                <img src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Producto" id="imagenes">
                 <div class="form-group">
                   <label for="Categoria_Select">Categoría</label>
                   <select name="categoria" class="form-control">
