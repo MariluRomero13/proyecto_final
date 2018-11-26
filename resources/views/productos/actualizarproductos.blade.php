@@ -33,13 +33,13 @@
 
 @section('contenido')
 
-	<div class="row justify-content-md-center">
+  <div class="row justify-content-md-center">
     <div class="col-6">
       <div class="card">
         <div class="card-header">Actualizar Producto</div>
           @foreach ($consulta as $c)
             <div class="card-body">
-              <form action="{{ url('actualizarproducto/$c->id') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ url("/actualizarproducto/$c->prodid") }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <img src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Producto" id="imagenes">
@@ -62,10 +62,14 @@
                   <label for="ApellidoMaternoInput">Descripcion</label>
                   <input value="{{$c->descripcion}}" name="descripcion" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ingrese su apellido Materno">
                 </div>
-                <div class="form-group">
-                  <label for="ImagenInput">Imagen {{$c->imagen}}</label>
-                  <input name="imagen" type="file" class="form-control" id="" placeholder=""
-                  value="">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
+                  </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="imagen" aria-describedby="inputGroupFileAddon01" value="{{$c->imagen}}">
+                    <label class="custom-file-label" for="inputGroupFile01">Selecciona una imágen</label>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Modificar</button>
               </form>

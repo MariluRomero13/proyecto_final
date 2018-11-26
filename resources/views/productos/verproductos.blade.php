@@ -3,14 +3,7 @@
 
 @section('css')
   <style>
-    table tr th{
-      text-align: center;
-    }
-
-    table tr{
-      text-align: center;
-    }
-
+   
     #imagenes{
       width: 295px; 
       margin: 0 auto;

@@ -45,7 +45,7 @@ class ProductosController extends Controller
       $cat = Categoria::all();
       $consulta = DB::table('categorias')
       ->join('productos', 'categorias.id',   '=','productos.categoria_id')
-      ->select('categorias.id as cateid', 'categorias.nombre as catenombre','productos.id','productos.nombre', 'productos.descripcion', 'productos.imagen')
+      ->select('categorias.id as cateid', 'categorias.nombre as catenombre','productos.id as prodid','productos.nombre', 'productos.descripcion', 'productos.imagen')
       ->where('productos.id','=', $id)
       ->get();
         
@@ -91,8 +91,8 @@ class ProductosController extends Controller
     {
 
 
-        $id = $request->categoria;
-        $categoria = Categoria::find($id);
+        $idc = $request->categoria;
+        $categoria = Categoria::find($idc);
         $prodmod = Producto::findOrFail($id);
       
         
