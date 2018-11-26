@@ -21,9 +21,11 @@ Route::get("/inicio",["middleware" => "verificador", "uses" => "PanelController@
 
 
 #Rutas De Productos
+#
 //Vistas De Productos
-Route::get("/viewproductos", "ProductosController@verproductos");
-Route::get("/viewregistrarproductos", "ProductosController@viewregistrarproductos");
+Route::get("/viewproductos", "ProductosController@verproductos")->name('viewproductos'); //muestra el formulario de ver productos
+Route::get("/viewregistrarproductos", "ProductosController@viewregistrarproductos")->name('viewregistrarproductos'); //muestra el formulario de registrar productos
+
 //Registrar Productos
 Route::post("/registrarproducto", "ProductosController@registrarproducto");
 Route::get("/altaProducto", "ProductosController@altaProducto");

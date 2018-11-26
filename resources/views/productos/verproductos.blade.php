@@ -1,5 +1,6 @@
 @extends('layouts.base')
 
+
 @section('css')
   <style>
     table tr th{
@@ -26,8 +27,27 @@
     #footerbuttons{
       width: 49%; 
       margin: 1% auto;
+      color: white;
     }
   </style>
+@endsection
+
+@section("menu")
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav ml-auto">
+            @if(Session::has("usuario"))
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Activo: {{ Session::get("usuario") }}</a>
+                </li>
+            @endif
+            <li class="nav-item">
+                <form action="{{ url('logout') }}" method="POST">
+                    {{ csrf_field() }}
+                    <button class="btn btn-danger" type="submit">Salir</button>
+                </form>
+            </li>
+        </ul>
+    </div>
 @endsection
 
 @section('contenido')
@@ -49,7 +69,7 @@
   </div>
 
 <div class="container">
-  @foreach($product as $pro)
+  @foreach($productos as $pro)
     <div class="card" id="cards">
       <img class="card-img-top" src="/imagenes/imagenes_productos/{{$pro->imagen}}" alt="Producto" id="imagenes">
       <div class="card-body">
@@ -57,8 +77,8 @@
         <p class="card-text">{{$pro->descripcion}}</p>
       </div>
       <div class="card-footer">
-        <button class="btn btn-warning" id="footerbuttons"> <a href="seleccionarproducto/{{$pro->id}}"> Actualizar </button>
-        <button class="btn btn-danger" id="footerbuttons"> <a href="eliminar/{{$pro->id}}"> Eliminar </button></a>
+        <a href="{{ url("/seleccionarproducto/$pro->id") }}" class="btn btn-warning" id="footerbuttons">Actualizar</a>
+        <a class="btn btn-danger" id="footerbuttons" href="{{ url("/eliminar/$pro->id") }}">Eliminar</a>
       </div>
     </div>
   @endforeach
