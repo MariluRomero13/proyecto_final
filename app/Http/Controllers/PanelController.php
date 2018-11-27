@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Session;
 
 class PanelController extends Controller
 {
+	function __construct()
+    {
+         $this->middleware('verificador');
+    }
     public function index()
     {
    		return view("panel.inicio");

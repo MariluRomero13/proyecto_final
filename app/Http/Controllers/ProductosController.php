@@ -16,7 +16,11 @@ use Carbon\Carbon;
 
 class ProductosController extends Controller
 {
- 
+    
+    function __construct()
+    {
+         $this->middleware('verificador');
+    }
     function viewregistrarproductos() //mostrar formulario de registro
     {
         $cat = Categoria::all();
