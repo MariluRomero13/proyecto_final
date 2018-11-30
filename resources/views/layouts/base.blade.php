@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Pragma" content="no-cache" />
 	<title>Sistema de ventas MRCJ</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="shortcut icon" href="imagenes/icono.png">
@@ -98,6 +100,12 @@
                 $(this).toggleClass('active');
             });
         });
+    </script>
+    <script type="text/javascript">
+        {
+            if(history.forward(1))
+                location.replace(history.forward(1))
+        }
     </script>
 </body>
 </html>

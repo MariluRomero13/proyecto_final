@@ -10,7 +10,12 @@ use Validator;
 use Redirect;
 
 class UsuarioController extends Controller
-{
+{	
+
+	  function __construct()
+	  {
+	  	 $this->middleware('verificador')->only('cerrarSesion');
+	  }	
 	  function mostrarLogin()
 	  {
 	      return view('auth.login');

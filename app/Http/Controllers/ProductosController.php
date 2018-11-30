@@ -16,7 +16,11 @@ use Carbon\Carbon;
 
 class ProductosController extends Controller
 {
- 
+    
+    function __construct()
+    {
+         $this->middleware('verificador');
+    }
     function viewregistrarproductos() //mostrar formulario de registro
     {
         $cat = Categoria::all();
@@ -25,19 +29,12 @@ class ProductosController extends Controller
 
     function verproductos() //mostrar formulario donde se ven los registros de los productos
     {
-        //$product = Producto::all();
-        //$cat = Categoria::all();
+
         $productos = Producto::has('categorias')->get();
         return view("productos.verproductos", compact('productos'));
     }
 
 
-    //Selectores
-    function altaProducto()
-    {
-        //$Prod = Producto::find(1);
-        //return view('ingresarproductos', compact('Prod'));
-    }
 
     function seleccionarproducto($id)
     {
@@ -48,14 +45,8 @@ class ProductosController extends Controller
       ->select('categorias.id as cateid', 'categorias.nombre as catenombre','productos.id as prodid','productos.nombre', 'productos.descripcion', 'productos.imagen')
       ->where('productos.id','=', $id)
       ->get();
-        
-        //return $consulta;
+
         return view('productos.actualizarproductos', compact('consulta','cat'));
-
-        //$prod = Producto::find($id);
-        //
-
-        
     }
 
 
@@ -100,13 +91,11 @@ class ProductosController extends Controller
         $prodmod->descripcion = $request->descripcion;
         if ($request->imagen) 
         {
-            //
             $info = $request->imagen;
             $photo = $request->file('imagen')->getClientOriginalName();
             $destination = base_path().'/public/imagenes/imagenes_productos';
             $request->file('imagen')->move($destination, $photo);
             $prodmod->imagen = $photo;
-            //
         }
 
         $categoria->productos()->save($prodmod);
