@@ -44,10 +44,10 @@
                     <a href="#inventario" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Inventario</a>
                     <ul class="collapse list-unstyled" id="inventario">
                         <li>
-                            <a href="#">Crear</a>
+                            <a href="{{url('viewRegistrarInventario')}}">Crear</a>
                         </li>
                         <li>
-                            <a href="#">Mostrar</a>
+                            <a href="{{url('viewMostrarInventario')}}">Mostrar</a>
                         </li>
                     </ul>
                      <a href="#ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ventas</a>

@@ -10,7 +10,7 @@ class Categoria extends Model
 	protected $primaryKey = 'id';
     public $timestamps = false;
 
-    public function productos()
+    public function productos() 
     {
     	return $this->HasMany(Producto::class,'categoria_id','id');
     }

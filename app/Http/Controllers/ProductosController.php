@@ -54,6 +54,8 @@ class ProductosController extends Controller
 
         //$prod = Producto::find($id);
         //
+
+        
     }
 
 
@@ -89,8 +91,6 @@ class ProductosController extends Controller
 
     function actualizarproducto(Request $request, $id)
     {
-
-
         $idc = $request->categoria;
         $categoria = Categoria::find($idc);
         $prodmod = Producto::findOrFail($id);

@@ -34,3 +34,17 @@ Route::get("/seleccionarproducto/{id}", "ProductosController@seleccionarproducto
 Route::post("/actualizarproducto/{id}", "ProductosController@actualizarproducto");
 //Eliminar Productos
 Route::get("/eliminar/{id}", "ProductosController@eliminarproducto");
+
+//Ver formulario registrar inventario
+Route::get("/viewRegistrarInventario", "InventarioController@viewRegistrarInventario");
+//Crear Inventario
+Route::post("/altaInventario", "InventarioController@registrarInventario");
+//ver inventario
+Route::get("/viewMostrarInventario", "InventarioController@viewInventario")->name('viewInventario');
+//ver formulario actualizar inventario
+Route::get("/viewActualizarInventario/{id}", "InventarioController@viewActualizarInventario");
+
+Route::post("/actualizarInventario/{id}", "InventarioController@actualizarInventario");
+
+Route::get("/eliminarInventario/{id}", "InventarioController@eliminarInventario");
+
