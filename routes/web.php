@@ -18,3 +18,9 @@ Route::post("/logout",['middleware' => "verificador", "uses" => "UsuarioControll
 
 //Rutas de inicio
 Route::get("/inicio",["middleware" => "verificador", "uses" => "PanelController@index"])->name('panel');
+
+Route::get("/categorias", "categoriacontroller@vista");
+Route::get("/cateagregar", "categoriacontroller@agregar");
+Route::POST("/cateagregar", "categoriacontroller@agregarcate");
+Route::get("/cateeditar/{id_cate}", "categoriacontroller@veditarcate");
+Route::POST("/cateeditar/{id}", "categoriacontroller@editarcate");
