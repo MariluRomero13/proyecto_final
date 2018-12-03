@@ -20,6 +20,7 @@ Route::get("/seleccionarproducto/{id}", "ProductosController@seleccionarproducto
 Route::post("/actualizarproducto/{id}", "ProductosController@actualizarproducto");
 Route::get("/eliminar/{id}", "ProductosController@eliminarproducto");
 Route::get("/vermasproductos/{id}","ProductosController@vermas");
+Route::post("/buscarproducto", "ProductosController@buscar");
 
 //Rutas de inventario
 Route::get("/viewRegistrarInventario", "InventarioController@viewRegistrarInventario");

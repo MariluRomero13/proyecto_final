@@ -107,7 +107,7 @@
                         <form action="{{ url("/actualizarproducto/$c->prodid") }}" method="POST" enctype="multipart/form-data">
                           {{ csrf_field() }}
                           <div class="form-group text-center">
-                            <img src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Producto" id="imagenes">
+                            <img src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Producto" id="imagenes" style="width: 18rem;">
                           </div>
                           <div class="form-group">
                             <label for="Categoria_Select">Categoría</label>
@@ -121,12 +121,18 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <label for="ApellidoPaternoInput">Nombre</label>
-                            <input value="{{$c->nombre}}" name="nombre" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ingrese su Apellido Paterno">
+                            <label for="nombre">Nombre</label>
+                            <input value="{{$c->nombre}}" name="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}" id="formGroupExampleInput2" placeholder="Ingrese el nombre del producto">
+
+                            @if ($errors->has('nombre'))
+                              <span class="invalid-feedback">
+                                <strong>{{ $errors->first('nombre') }}</strong>
+                              </span>
+                            @endif
                           </div>
                           <div class="form-group">
-                            <label for="ApellidoMaternoInput">Descripción</label>
-                            <input value="{{$c->descripcion}}" name="descripcion" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ingrese su apellido Materno">
+                            <label for="descripcion">Descripción</label>
+                            <input value="{{$c->descripcion}}" name="descripcion" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ingrese la descripción del producto">
                           </div>
                           <div class="form-group">
                             <label for="exampleFormControlFile1">Imagén seleccionada {{ $c->imagen }}</label><br>

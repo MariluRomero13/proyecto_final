@@ -29,17 +29,28 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="CodigoInput">Código</label>
-                    <input name="id" type="text" class="form-control" placeholder="Ingrese un código" required value="{{ old('id') }}">
+                    <input name="id" type="text" class="form-control {{ $errors->has('id') ? ' is-invalid' : '' }}" placeholder="Ingrese un código" required value="{{ old('id') }}">
+                    @if ($errors->has('id'))
+                        <span class="invalid-feedback">
+                          <strong>{{ $errors->first('id') }}</strong>
+                        </span>
+                    @endif
+
                   </div>
                   <div class="form-group col-md-6">
                     <label for="NombreInput">Nombre</label>
-                    <input name="nombre" type="text" class="form-control"  placeholder="Ingrese un nombre" required value="{{ old('nombre') }}">
+                    <input name="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}"  placeholder="Ingrese un nombre"  value="{{ old('nombre') }}">
+                      @if ($errors->has('nombre'))
+                        <span class="invalid-feedback">
+                          <strong>{{ $errors->first('nombre') }}</strong>
+                        </span>
+                      @endif
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="CategoriaSelect">Categoría</label>
                   <select name="categoria" class="form-control" required>
-                    <option selected="selected" value="">Selecciona una categoría</option>
+                    <option selected="{{ old('categoria') }}" value="">Selecciona una categoría</option>
                     @foreach($cat as $categoria)
                       <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                     @endforeach
@@ -54,26 +65,25 @@
                 
                 <div class="form-group">
                   <label for="exampleFormControlFile1">Selecciona una imágen</label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1" name="imagen" value="{{ old('imagen') }}">
+                  <input type="file" class="form-control-file {{ $errors->has('imagen') ? ' is-invalid' : '' }}" id="exampleFormControlFile1" name="imagen" value="{{ old('imagen') }}">
+                  @if ($errors->has('imagen'))
+                    <span class="invalid-feedback">
+                      <strong>{{ $errors->first('imagen') }}</strong>
+                    </span>
+                  @endif
                 </div>
                 <button type="reset" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
                 <button type="submit" class="btn btn-success">Registrar</button> 
               </form>
               
               <br>
-              @if($errors->any())
-                <div class="alert alert-danger animated bounceInUp" role="alert">
-                  <strong> Tenemos los siguientes errores </strong>
-                  @foreach($errors->all() as $error)
-                  <ul>
-                    <li>{{$error}}</li>
-                  </ul>
-                  @endforeach
-                </div>
-              @endif
           </div>
         </div>
     </div>
   </div>
 @endsection
 
+
+
+
+ 

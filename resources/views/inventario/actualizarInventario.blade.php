@@ -118,17 +118,32 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label for="stock_n">Stock nuevo</label>
-                        <input name="stock_n" type="text" class="form-control" id="" placeholder="Ingrese cantidad de stock inicial" value="{{0}}">
+                        <input name="stock_n" type="text" class="form-control{{ $errors->has('stock_n') ? ' is-invalid' : '' }} " id="" placeholder="Ingrese cantidad de stock inicial">
+                        @if ($errors->has('stock_n'))
+                            <span class="invalid-feedback">
+                              <strong>{{ $errors->first('stock_n') }}</strong>
+                            </span>
+                        @endif
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="precio_c">Precio de compra</label>
-                        <input name="precio_c" type="text" class="form-control" id="" placeholder="Ingrese el precio de compra" value="{{$i->precio_compra}}">
+                        <input name="precio_c" type="text" class="form-control {{ $errors->has('precio_c') ? ' is-invalid' : '' }}" id="" placeholder="Ingrese el precio de compra" value="{{$i->precio_compra}}">
+                        @if ($errors->has('precio_c'))
+                            <span class="invalid-feedback">
+                              <strong>{{ $errors->first('precio_c')}}</strong>
+                            </span>
+                        @endif
                       </div>
                       <div class="form-group col-md-6">
                         <label for="precio_v">Precio de venta</label>
-                        <input name="precio_v" type="text" class="form-control" id="" placeholder="Ingrese el precio de venta" value="{{$i->precio_venta}}">
+                        <input name="precio_v" type="text" class="form-control {{ $errors->has('precio_v') ? ' is-invalid' : '' }}" id="" placeholder="Ingrese el precio de venta" value="{{$i->precio_venta}}">
+                        @if ($errors->has('precio_v'))
+                            <span class="invalid-feedback">
+                              <strong>{{ $errors->first('precio_v') }}</strong>
+                            </span>
+                        @endif
                       </div>
                     </div>
                     @endforeach

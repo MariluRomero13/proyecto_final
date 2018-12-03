@@ -23,19 +23,19 @@
   <div class="form-inline">
     <label class="sr-only" for="inlineFormInputGroupUsername2">Buscar</label>
       <div class="input-group mb-2 mr-sm-2">
+        @csrf
         <div class="input-group-prepend">
           <div class="input-group-text"><i class="fa fa-search"></i></div>
         </div>
-        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Buscar...">
+        <input type="text" class="form-control" id="buscador" placeholder="Buscar...">
       </div>
   </div>
 </div>
 <br>
 <div class="container-fluid" id="ContenidoCartas">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" id="cuerpo">
       @foreach($productos as $pro)
-      
-        <div class="card" style="width: 17rem; margin-left: 2%;">
+        <div class="card" style="width: 17rem; margin-left: 2%;" >
           <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$pro->imagen"}}" alt="Card image cap" class="img-fluid" style="width: 16.5rem; height: 17rem;">
           <div class="card-body">
             <h5 class="card-title">{{$pro->id }} - {{ $pro->nombre }}</h5>
@@ -45,13 +45,20 @@
             <a href="{{ url("/eliminar/$pro->id") }}" class="btn btn-danger"><i class="fas fa-times-circle"></i></a>
             <a href="{{ url("vermasproductos/$pro->id") }}" class="btn btn-success"><i class="far fa-eye"></i></a>
           </div>
-        </div>
-      
+      </div>
       @endforeach
+      <div id="error"></div>
   </div>
   <br>
   {{ $productos->render()  }}
 </div>
 @endsection
+
+@section("javascript")
+  <script src="js/buscarProducto.js"></script>
+@endsection
+
+
+
 
 

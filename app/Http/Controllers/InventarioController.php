@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon; 
 use Validator;
+use App\Http\Requests\InsertarInventarioRequest;
+use App\Http\Requests\ActualizarInventarioRequest;
 
 class InventarioController extends Controller
 {
@@ -23,18 +25,9 @@ class InventarioController extends Controller
     	return view("inventario.crearInventario", compact("productos"));
     }
 
-    function registrarInventario(Request $r)
+    function registrarInventario(InsertarInventarioRequest $r)
     {
-    	$validator= Validator::make($r->all(),
-        	["idproducto"=>"required", "stock_a"=>"required", "precio_v"=>"required", "precio_c" => "required"],
-        	["idproducto.required"=>"Seleccione el producto", "stock_a.required"=>"Ingrese el stock actual", "precio_v.required"=>"Ingrese el precio de venta", "precio_c.required"=>"Ingrese el precio de compra"]);
-
-    	if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
+    	
 		$producto = Producto::find($r->idproducto);
         $inventario = new Inventario();
         $inventario->stock_actual = $r->stock_a;
@@ -69,19 +62,10 @@ class InventarioController extends Controller
         return view("inventario.actualizarInventario", compact("inventario"));
     }
 
-    function actualizarInventario(Request $r, $id)
+    function actualizarInventario(ActualizarInventarioRequest $r, $id)
     {   
 
-        $validator= Validator::make($r->all(),
-            ["stock_a"=>"required|min:1", "precio_v"=>"required", "precio_c" => "required"],
-            ["idproducto.required"=>"Seleccione el producto", "stock_a.required"=>"Ingrese el stock actual", "precio_v.required"=>"Ingrese el precio de venta", "precio_c.required"=>"Ingrese el precio de compra"]);
-
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
+        
         $inventario = inventario::find($id);
         $inventario->stock_actual = $inventario->stock_actual  +  $r->stock_n;
         $inventario->precio_venta = $r->precio_v;

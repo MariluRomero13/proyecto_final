@@ -10,9 +10,9 @@ use Session;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Eloquent\Model;
-use Validator;
 use Carbon\Carbon;
-
+use App\Http\Requests\InsertarProductoRequest;
+use App\Http\Requests\ActualizarProductoRequest;
 
 class ProductosController extends Controller
 {
@@ -50,18 +50,9 @@ class ProductosController extends Controller
     }
 
 
-    function registrarproducto(Request $request)
+    function registrarproducto(InsertarProductoRequest $request)
     {
-        $validator = Validator::make($request->all(),
-        	["id"=>"required|max:15|min:10", "nombre"=>"required", "descripcion"=>"required", "imagen" => "required", "categoria"=>"required"],
-        	["id.required"=>"Ingrese un código","id.max" => "El código no puede ser mayor a 15 caracteres", "nombre.required"=>"Ingrese un nombre", "descripcion.required"=>"Ingrese una descripción", "categoria.required"=>"Seleccione una categoría", "imagen.required"=>"seleccione una imágen"]);
-
-        if ($validator->fails()) {
-            return back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
+        
     	$info = $request->imagen;
         $photo = $request->file('imagen')->getClientOriginalName();
         $destination = base_path().'/public/imagenes/imagenes_productos';
@@ -70,21 +61,26 @@ class ProductosController extends Controller
 
         $id = $request->categoria;
         $categoria = Categoria::find($id);
-
         $Prod = new Producto();
         $Prod->id = $request->id;
         $Prod->nombre = $request->nombre;
-        $Prod->descripcion = $request->descripcion;
         $Prod->imagen = $photo;
-
+        if($request->descripcion == "")
+        {
+            $Prod->descripcion = "Sin descripcion del articulo";
+        }
+        else
+        {
+            $Prod->descripcion = $request->descripcion;
+        }
         $categoria->productos()->save($Prod);
         return redirect()->route("viewproductos");
     
-        
+        //Sin descripcion del articulo
     }
 
 
-    function actualizarproducto(Request $request, $id)
+    function actualizarproducto(ActualizarProductoRequest $request, $id)
     {
         $idc = $request->categoria;
         $categoria = Categoria::find($idc);
@@ -122,5 +118,27 @@ class ProductosController extends Controller
           ->where('productos.id','=', $id)
           ->get();
           return view("productos.vermas",compact("consulta"));
+    }
+
+    function buscar(Request $r)
+    {
+        $busqueda = DB::table('categorias')
+            ->join('productos', 'categorias.id',   '=','productos.categoria_id')
+            ->select('productos.id','productos.nombre', 'productos.descripcion', 'productos.imagen')->where("productos.nombre",'LIKE',"%".$r->get("valor")."%")
+            ->orWhere("productos.id",'LIKE',"%".$r->get("valor")."%")->get();
+
+        if ($r->get("valor") == "") 
+        {
+             $todo= DB::table('categorias')
+            ->join('productos', 'categorias.id',   '=','productos.categoria_id')
+            ->select('productos.id','productos.nombre', 'productos.descripcion', 'productos.imagen')->get();
+             return ["status" => 2, "todo" => $todo];
+        }
+
+        if ($busqueda->count() > 0) 
+        {
+             return ["status"=> 1, "productos" => $busqueda];
+        } 
+        return ["status"=> 0, "error" => "Productos no encontrado"];
     }
 }

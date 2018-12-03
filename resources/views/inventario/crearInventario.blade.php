@@ -36,40 +36,49 @@
         Registrar Inventario
       </div>
       <div class="card-body">
-         @if($errors->any())
-          <div class="alert alert-info animated bounceInUp" role="alert">
-            <strong> Tenemos los siguientes errores </strong>
-            @foreach($errors->all() as $error)
-            <ul>
-              <li>{{$error}}</li>
-            </ul>
-            @endforeach
-          </div>
-          @endif
-          
         <form action="{{url('/altaInventario')}}" method="POST" enctype="multipart/form-data">
           {{ csrf_field() }}
           <div class="form-group">
             <label for="idproducto">Producto</label>
-            <select name="idproducto" class="form-control">
-              <option selected="selected">Selecciona un producto</option>
+            <select name="idproducto" class="form-control {{ $errors->has('idproducto') ? ' is-invalid' : '' }}">
+              <option selected="selected" value="">Selecciona un producto</option>
               @foreach($productos as $p)
                 <option value="{{$p->id}}">{{ $p->id }} {{$p->nombre}}</option>
               @endforeach
             </select>
-          </div>
+            @if ($errors->has('idproducto'))
+                <span class="invalid-feedback">
+                  <strong>{{ $errors->first('idproducto') }}</strong>
+                </span>
+            @endif
+        </div>
           <div class="form-group">
             <label for="stock_a">Stock</label>
-            <input name="stock_a" type="text" class="form-control" id="" placeholder="Ingrese cantidad de stock inicial" required>
+            <input name="stock_a" type="text" class="form-control {{ $errors->has('stock_a') ? ' is-invalid' : '' }}" id="" placeholder="Ingrese cantidad de stock inicial" required value="{{ old('stock_a') }}">
+            @if ($errors->has('stock_a'))
+                <span class="invalid-feedback">
+                  <strong>{{ $errors->first('stock_a') }}</strong>
+                </span>
+            @endif
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="precio_c">Precio de compra</label>
-              <input name="precio_c" type="text" class="form-control" id="" placeholder="Ingrese el precio de compra" required>
+              <input name="precio_c" type="text" class="form-control {{ $errors->has('precio_c') ? ' is-invalid' : '' }}" id="" placeholder="Ingrese el precio de compra" required value="{{ old('precio_c') }}">
+              @if ($errors->has('precio_c'))
+                <span class="invalid-feedback">
+                  <strong>{{ $errors->first('precio_c') }}</strong>
+                </span>
+              @endif
             </div>
             <div class="form-group col-md-6">
               <label for="precio_v">Precio de venta</label>
-              <input name="precio_v" type="text" class="form-control" id="" placeholder="Ingrese el precio de venta" required>
+              <input name="precio_v" type="text" class="form-control {{ $errors->has('stock_a') ? ' is-invalid' : '' }}" id="" placeholder="Ingrese el precio de venta" required value="{{ old('precio_v') }}">
+              @if ($errors->has('precio_v'))
+                <span class="invalid-feedback">
+                  <strong>{{ $errors->first('precio_v') }}</strong>
+                </span>
+              @endif
             </div>
           </div>
           <button type="reset" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
