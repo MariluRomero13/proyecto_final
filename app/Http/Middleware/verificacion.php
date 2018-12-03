@@ -15,6 +15,10 @@ class verificacion
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if ($request->session()->has("usuario")) 
+        {
+            return $next($request);
+        }
+        return redirect("/");
     }
 }

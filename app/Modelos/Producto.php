@@ -7,10 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     protected $table = "productos";
+	protected $primaryKey = 'id';
     public $timestamps = false;
 
     public function categorias()
     {
-    	return $this->BelongsTo("App\Modelos\Categoria", "id");
+    	return $this->belongsTo(Categoria::class,'categoria_id','id');
     }
+
+    public function inventario()
+    {
+    	return $this->HasMany(Inventario::class,'producto_id','id');
+    }
+   
 }

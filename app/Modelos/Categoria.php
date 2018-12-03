@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
 {
-    protected $table = "categorias";
+    Protected $table = 'categorias';
+	protected $primaryKey = 'id';
     public $timestamps = false;
 
-    public function Productos()
+    public function productos() 
     {
-    	return $this->HasMany("App\Modelos\Producto", "categoria", "id");
+    	return $this->HasMany(Producto::class,'categoria_id','id');
     }
 }

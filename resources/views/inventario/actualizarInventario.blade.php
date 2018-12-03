@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta http-equiv="Expires" content="0" />
     <meta http-equiv="Pragma" content="no-cache" />
-	<title>Sistema de ventas MRCJ</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="shortcut icon" href="imagenes/icono.png">
-
-    <link rel="stylesheet" href="{{'css/styles.css'}}">
+  <title>Sistema de ventas MRCJ</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="shortcut icon" href="/imagenes/icono.png">
+    <link rel="stylesheet" href="{{"/css/styles.css"}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
  
     @yield('css')
 </head>
 <body>
-	
 
     <div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <img class="img-fluid rounded mx-auto d-block" src="imagenes/logo.png" alt="MRCJ Logo" style="width: 100px; margin-bottom: 5%;">
+                <img class="img-fluid rounded mx-auto d-block" src="/imagenes/logo.png" alt="MRCJ Logo" style="width: 100px; margin-bottom: 5%;">
             </div>
             <ul class="list-unstyled components">
                 <li>
@@ -28,10 +26,10 @@
                     <a href="#categorias" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categorías</a>
                     <ul class="collapse list-unstyled" id="categorias">
                         <li>
-                            <a href="{{url('/cateagregar')}}">Crear</a>
+                            <a href="#">Crear</a>
                         </li>
                         <li>
-                            <a href="{{url('/categorias')}}">Mostrar</a>
+                            <a href="#">Mostrar</a>
                         </li>
                     </ul>
 
@@ -81,15 +79,68 @@
                         <i class="fas fa-align-justify"></i>
                     </button>
 
-                    @yield('menu')
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="nav navbar-nav ml-auto">
+                          @if(Session::has("usuario"))
+                              <li class="nav-item active">
+                                  <a class="nav-link" href="#">Activo: {{ Session::get("usuario") }}</a>
+                              </li>
+                          @endif
+                          <li class="nav-item">
+                              <form action="{{ url('logout') }}" method="POST">
+                                  {{ csrf_field() }}
+                                  <button class="btn btn-danger" type="submit">Salir</button>
+                              </form>
+                          </li>
+                      </ul>
+                  </div>
                 </div>
             </nav>
             
-            @yield('contenido')
+            <div class="row justify-content-md-center">
+              <div class="col-6">
+                <div class="card">
+                <div class="card-header text-white bg-dark mb-3">
+                  Actualizar Inventario
+                </div>
+                @foreach($inventario as $i)
+                <div class="card-body">
+                  <form action="{{url("/actualizarInventario/$i->inventarioid")}}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                      <label for="producto">Producto</label>
+                      <input name="producto" type="text" class="form-control"  placeholder="Ingrese cantidad de stock inicial" value="{{$i->nombre}}" disabled>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="stock_a">Stock actual</label>
+                        <input name="stock_a" type="text" class="form-control" id="" placeholder="Ingrese cantidad de stock inicial" value="{{$i->stock_actual}}" disabled>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="stock_n">Stock nuevo</label>
+                        <input name="stock_n" type="text" class="form-control" id="" placeholder="Ingrese cantidad de stock inicial" value="{{0}}">
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="precio_c">Precio de compra</label>
+                        <input name="precio_c" type="text" class="form-control" id="" placeholder="Ingrese el precio de compra" value="{{$i->precio_compra}}">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="precio_v">Precio de venta</label>
+                        <input name="precio_v" type="text" class="form-control" id="" placeholder="Ingrese el precio de venta" value="{{$i->precio_venta}}">
+                      </div>
+                    </div>
+                    @endforeach
+                    <button type="submit" class="btn btn-success btn-block" id="footerbuttons">Modificar</button>
+                    </form>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
         </div>
     </div>
-
-
     <script
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -105,14 +156,5 @@
             });
         });
     </script>
-
-    <script type="text/javascript">
-        /*{
-            if(history.forward(1))
-                location.replace(history.forward(1))
-        }*/
-    </script>
-
-    @yield("javascript")
 </body>
 </html>
