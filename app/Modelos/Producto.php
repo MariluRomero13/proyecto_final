@@ -3,10 +3,10 @@
 namespace App\Modelos;
 
 use Illuminate\Database\Eloquent\Model;
- 
+
 class Producto extends Model
 {
-    Protected $table = 'productos';
+    protected $table = "productos";
 	protected $primaryKey = 'id';
     public $timestamps = false;
 
@@ -21,4 +21,3 @@ class Producto extends Model
     }
    
 }
-

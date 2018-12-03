@@ -8,8 +8,15 @@ Route::post("/iniciarsesion", "UsuarioController@iniciarSesion");
 Route::post("/logout","UsuarioController@cerrarSesion");
 
 //Rutas de inicio
+Route::get("/inicio",["middleware" => "verificador", "uses" => "PanelController@index"])->name('panel');
 Route::get("/inicio","PanelController@index")->name('panel');
 
+//Rutas de categoria
+Route::get("/categorias", "categoriacontroller@vista");
+Route::get("/cateagregar", "categoriacontroller@agregar");
+Route::POST("/cateagregar", "categoriacontroller@agregarcate");
+Route::get("/cateeditar/{id_cate}", "categoriacontroller@veditarcate");
+Route::POST("/cateeditar/{id}", "categoriacontroller@editarcate");
 
 //Rutas De Productos
 Route::get("/viewproductos", "ProductosController@verproductos")->name('viewproductos'); //

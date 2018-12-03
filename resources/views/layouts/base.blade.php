@@ -7,7 +7,8 @@
 	<title>Sistema de ventas MRCJ</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="shortcut icon" href="imagenes/icono.png">
-    <link rel="stylesheet" href="{{"css/styles.css"}}">
+
+    <link rel="stylesheet" href="{{'css/styles.css'}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
  
     @yield('css')
@@ -27,10 +28,10 @@
                     <a href="#categorias" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categorías</a>
                     <ul class="collapse list-unstyled" id="categorias">
                         <li>
-                            <a href="#">Crear</a>
+                            <a href="{{url('/cateagregar')}}">Crear</a>
                         </li>
                         <li>
-                            <a href="#">Mostrar</a>
+                            <a href="{{url('/categorias')}}">Mostrar</a>
                         </li>
                     </ul>
 
