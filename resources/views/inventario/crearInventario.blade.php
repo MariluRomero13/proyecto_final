@@ -32,7 +32,7 @@
   <div class="row justify-content-md-center">
     <div class="col-6">
       <div class="card">
-      <div class="card-header">
+      <div class="card-header text-white bg-dark mb-3">
         Registrar Inventario
       </div>
       <div class="card-body">
@@ -54,34 +54,33 @@
             <select name="idproducto" class="form-control">
               <option selected="selected">Selecciona un producto</option>
               @foreach($productos as $p)
-                <option value="{{$p->id}}">{{$p->nombre}}</option>
+                <option value="{{$p->id}}">{{ $p->id }} {{$p->nombre}}</option>
               @endforeach
             </select>
           </div>
           <div class="form-group">
-            <label for="stock_a">Stock actual</label>
-            <input name="stock_a" type="text" class="form-control" id="" placeholder="Ingrese cantidad de stock inicial">
+            <label for="stock_a">Stock</label>
+            <input name="stock_a" type="text" class="form-control" id="" placeholder="Ingrese cantidad de stock inicial" required>
           </div>
-          <div class="form-group">
-            <label for="precio_v">Precio de venta</label>
-            <input name="precio_v" type="text" class="form-control" id="" placeholder="Ingrese el precio de venta">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="precio_c">Precio de compra</label>
+              <input name="precio_c" type="text" class="form-control" id="" placeholder="Ingrese el precio de compra" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="precio_v">Precio de venta</label>
+              <input name="precio_v" type="text" class="form-control" id="" placeholder="Ingrese el precio de venta" required>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="precio_c">Precio de compra</label>
-            <input name="precio_c" type="text" class="form-control" id="" placeholder="Ingrese el precio de compra">
-          </div>
-          <div class="form-group">
-            <label for="fecha_a">Fecha de adquisicion</label>
-            <input name="fecha_a" type="date" class="form-control" id="" placeholder="">
-          </div>
-          @if(Session::has("mensaje"))
-                  <div class="alert alert-info animated bounceInUp" role="alert">
-                    <strong>{{Session::get("mensaje")}}</strong>
-                  </div>
-          @endif
-          <button type="reset" class="btn btn-primary" id="footerbuttons">Limpiar</button>
-          <button type="submit" class="btn btn-success" id="footerbuttons">Registrar</button>
+          <button type="reset" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+          <button type="submit" class="btn btn-success">Registrar</button> 
           </form>
+          @if(Session::has("mensaje"))
+            <br>
+            <div class="alert alert-info animated bounceInUp" role="alert">
+              <strong>{{Session::get("mensaje")}}</strong>
+            </div>
+          @endif
         </div>
       </div>
       

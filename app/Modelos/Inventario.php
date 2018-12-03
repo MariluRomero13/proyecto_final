@@ -15,6 +15,11 @@ class Inventario extends Model
     	return $this->belongsTo(Producto::class, 'producto_id', 'id');
     }
 
+    public function detalle_inventario()
+    {
+    	return $this->hasMany(DetalleInventario::class,'inventario_id','id');
+    }
+
     
 
 

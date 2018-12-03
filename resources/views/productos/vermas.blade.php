@@ -99,45 +99,20 @@
             </nav>
             
             <div class="row justify-content-md-center">
-              <div class="col-6">
-                <div class="card">
-                  <div class="card-header text-white bg-dark mb-3">Actualizar Producto</div>
-                    <div class="card-body">
-                      @foreach ($consulta as $c)
-                        <form action="{{ url("/actualizarproducto/$c->prodid") }}" method="POST" enctype="multipart/form-data">
-                          {{ csrf_field() }}
-                          <div class="form-group text-center">
-                            <img src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Producto" id="imagenes">
-                          </div>
-                          <div class="form-group">
-                            <label for="Categoria_Select">Categoría</label>
-                            <select name="categoria" class="form-control">
-                              <option value="{{$c->cateid}}" selected="selected">{{$c->catenombre}}</option>
-                              @foreach($cat as $categoria)
-                                <option value="{{$categoria->id}}">
-                                  {{$categoria->nombre}}
-                                </option>
-                              @endforeach
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="ApellidoPaternoInput">Nombre</label>
-                            <input value="{{$c->nombre}}" name="nombre" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ingrese su Apellido Paterno">
-                          </div>
-                          <div class="form-group">
-                            <label for="ApellidoMaternoInput">Descripción</label>
-                            <input value="{{$c->descripcion}}" name="descripcion" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ingrese su apellido Materno">
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleFormControlFile1">Imagén seleccionada {{ $c->imagen }}</label><br>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="imagen">
-                          </div>
-                          <button type="submit" class="btn btn-success btn-block">Modificar</button>
-                        </form>
-                    @endforeach
-                  </div>
-                </div>      
+              @foreach($consulta as $c)
+              <div class="card text-center" style="background-color: white; width: 20rem; float: left">
+                <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Card image cap" width: 20rem;">
               </div>
+              <div class="card" style="width: 20rem;">
+                <div class="card-body" style="float: right;">
+                  <h5 class="card-title">{{ $c->nombre }}</h5>
+                  <p>Código: {{ $c->prodid }}.</p>
+                  <p class="card-text">Descripción: {{ $c->descripcion }}.</p>
+                  <p>Categoría: {{ $c->catenombre }}.</p>
+                  <a href="#" class="btn btn-primary" id="volver"  onclick="history.back()" ><i class="fas fa-arrow-left"></i></a>
+                </div>
+              </div>
+              @endforeach
             </div>
         </div>
     </div>
@@ -154,7 +129,11 @@
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
+
+            
         });
+
+
     </script>
 </body>
 </html>
