@@ -141,4 +141,17 @@ class ProductosController extends Controller
         } 
         return ["status"=> 0, "error" => "Productos no encontrado"];
     }
+
+    function buscar_producto_inventario(Request $r)
+    {
+        $productos = DB::table("productos")
+            ->join("inventario","producto_id", "=","productos.id")
+            ->select("inventario.id as invid","productos.id as codigo","productos.nombre","inventario.stock_actual as stock",
+                "inventario.precio_venta as precio")
+            ->where("productos.id","=",$r->get("valor"))
+            ->where("inventario.stock_actual",">","0")->get();
+        
+        return ["status"=> 1, "productos"=> $productos];
+           
+    }
 }

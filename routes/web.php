@@ -37,3 +37,9 @@ Route::get("/viewActualizarInventario/{id}", "InventarioController@viewActualiza
 Route::post("/actualizarInventario/{id}", "InventarioController@actualizarInventario");
 Route::get("/eliminarInventario/{id}", "InventarioController@eliminarInventario");
 Route::post("/buscarinventario", "InventarioController@buscar");
+
+//Rutas de ventas
+Route::get("/mostrarventas","VentaController@mostrar_ventas")->name("ventas");
+Route::get("/crearventas","VentaController@index")->name("crearventas");
+Route::post("/buscarproductoventa","ProductosController@buscar_producto_inventario");
+Route::post("/registrarVenta","VentaController@registrarVenta");
