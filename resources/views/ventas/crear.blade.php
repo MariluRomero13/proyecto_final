@@ -223,7 +223,6 @@
 				precio_v.val("");
 				$("#cantidad").val("");
 				stock_a.val("");
-				//inventarioid = 0;
 				$("#codigo").val("");
 			}
 			
@@ -241,15 +240,9 @@
 			$("#registrar").click(function(event) {
 				
 				var token = $("input[name=_token]").val();
-				
-				console.log(arreglo);
-
-				
-				
-
 				$.ajax({
 					url: "/registrarVenta",
-					data: {_token: token, "producto": arreglo},
+					data: {_token: token, "producto": arreglo, "total": total},
 					type: "POST",
 					datatype: "json",
 					success: function(response)
@@ -263,3 +256,4 @@
 		});
 	</script>
 @endsection
+

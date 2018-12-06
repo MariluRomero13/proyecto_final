@@ -24,7 +24,7 @@ class InsertarProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            "id"=>"integer|required|max:17|min:10",
+            "id"=>"string|required|max:17|min:10",
             "nombre"=>"required|max:48|min:3",
             "imagen"=> "required",
             "categoria"=>"required",
@@ -37,7 +37,7 @@ class InsertarProductoRequest extends FormRequest
     {
       return [
         'id.required' => 'Olvidaste ingresar el código del producto',
-        'id.integer' => 'Solamente se permiten números',
+        'id.string' => 'Solamente se permiten números',
         'id.max' => 'El código no puede ser mayor a 17 dígitos',
         'id.min' => 'El código no puede ser menor a 10 dígitos',
         'nombre.required' => 'Olvidaste ingresar el nombre del producto',
