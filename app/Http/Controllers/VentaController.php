@@ -68,11 +68,12 @@ class VentaController extends Controller
 
 	public function mostrar_detalles($id)
 	{
-		$busqueda = DB::table("productos")
+		$busqueda = DB::table("categorias")
+			->join("productos","categoria_id","=","categorias.id")
 			->join("inventario","producto_id","=","productos.id")
 			->join("detalle_ventas","inventario_id","=","inventario.id")
 			->join("ventas","ventas.id","=","detalle_ventas.venta_id")
-			->select("productos.id as codigo","productos.nombre","inventario.precio_venta","detalle_ventas.cantidad","detalle_ventas.subtotal","ventas.total")
+			->select("categorias.nombre as categoria","productos.id as codigo","productos.nombre","inventario.precio_venta","detalle_ventas.cantidad","detalle_ventas.subtotal","ventas.total")
 			->where("ventas.id","=",$id)->get();
 
 		return view("ventas.mostrardetalle", compact("busqueda"));

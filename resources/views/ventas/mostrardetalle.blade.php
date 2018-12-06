@@ -106,6 +106,7 @@
                         <tr>
                           <th>Código</th>
                           <th>Nombre</th>
+                          <th>Categoría</th>
                           <th>Precio de venta</th>
                           <th>Cantidad comprada</th>
                           <th>Subtotal</th>
@@ -116,6 +117,7 @@
                         <tr> 
                           <td>{{$b->codigo}}</td>           
                           <td>{{$b->nombre}}</td>
+                          <td>{{$b->categoria}}</td>
                           <td class="text-center">${{$b->precio_venta}}</td>
                           <td class="text-center">{{$b->cantidad}}</td>
                           <td class="text-center">${{$b->subtotal}}</td>
@@ -124,6 +126,7 @@
                       </tbody>
                       <tfoot>
                         <th>Total</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
