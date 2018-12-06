@@ -11,13 +11,13 @@ class Categoriacontroller extends Controller
     function vista()
     {
         $categorias = Categoria::with("productos")->get();
-    	return view("vistas_categoria.vcategoria", compact("categorias"));
+    	return view("categorias.vcategoria", compact("categorias"));
     }
 
     function agregar()
     {
     	$productos = Producto::all();
-    	return view("vistas_categoria.cateagregar", compact("productos"));
+    	return view("categorias.cateagregar", compact("productos"));
     }
 
     function agregarcate(request $r)
@@ -35,7 +35,7 @@ class Categoriacontroller extends Controller
     function veditarcate($id_cate)
     {
         $categorias = Categoria::find($id_cate);
-        return view("vistas_categoria.editarcate", compact("categorias"));
+        return view("categorias.editarcate", compact("categorias"));
     }
 
     function editarcate(request $r, $id)

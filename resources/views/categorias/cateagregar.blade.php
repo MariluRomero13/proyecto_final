@@ -9,9 +9,7 @@
   <div class="row col-md-12">
       <div class="col-md-6 " style="margin: 0 auto; float: none; margin-bottom: 10px;">
   <div class="card">
-    <div class="card-header" style="background-color: gray; color: white;">
-      Agregar una categoria
-    </div>
+    <div  class="card-header text-white bg-dark mb-3">Agregar Categoría</div>
     <div class="card-body" >
       <form action="{{url('/cateagregar')}}" method="POST" role="form">
     {{ csrf_field() }}
@@ -30,7 +28,8 @@
       </div>
     @endif
 
-    <button type="submit" class="btn btn-primary">Agregar</button>
+    <button type="reset" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+    <button type="submit" class="btn btn-success">Agregar</button> 
   </form>
     </div>
   </div>

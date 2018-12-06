@@ -13,7 +13,6 @@
     @yield('css')
 </head>
 <body>
-  
 
     <div class="wrapper">
         <!-- Sidebar Holder -->
@@ -98,24 +97,45 @@
                 </div>
             </nav>
             
-            <div class="row justify-content-md-center">
-              @foreach($consulta as $c)
-              <div class="card text-center" style="background-color: white; width: 20rem; float: left">
-                <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Card image cap" width: 20rem;">
-              </div>
-              <div class="card" style="width: 20rem;">
-                <div class="card-body" style="float: right;">
-                  <h5 class="card-title">{{ $c->nombre }}</h5>
-                  <p>Código: {{ $c->prodid }}.</p>
-                  <p class="card-text">Descripción: {{ $c->descripcion }}.</p>
-                  <p>Categoría: {{ $c->catenombre }}.</p>
-                  <a href="#" class="btn btn-primary" id="volver"  onclick="history.back()" ><i class="fas fa-arrow-left"></i></a>
+            
+                <div class="row justify-content-md-center">
+                  <div class="col-12">
+                    <a href="#" class="btn btn-primary" id="volver"  onclick="history.back()" ><i class="fas fa-arrow-left"></i></a><br><br>
+                    <table class="table table-responsive-lg table-hover">
+                      <thead>
+                        <tr>
+                          <th>Código</th>
+                          <th>Nombre</th>
+                          <th>Precio de venta</th>
+                          <th>Cantidad comprada</th>
+                          <th>Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody id="cuerpo">
+                       @foreach($busqueda as $b)
+                        <tr> 
+                          <td>{{$b->codigo}}</td>           
+                          <td>{{$b->nombre}}</td>
+                          <td class="text-center">${{$b->precio_venta}}</td>
+                          <td class="text-center">{{$b->cantidad}}</td>
+                          <td class="text-center">${{$b->subtotal}}</td>
+                        </tr>
+                       @endforeach
+                      </tbody>
+                      <tfoot>
+                        <th>Total</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><h5 id="total">${{ $b->total }}</h5></th>
+                      </tfoot>
+                    </table>
+                    <br>
+                  </div>
                 </div>
               </div>
-              @endforeach
             </div>
-        </div>
-    </div>
+    
     <script
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -129,11 +149,9 @@
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
-
-            
         });
-
-
     </script>
 </body>
 </html>
+
+

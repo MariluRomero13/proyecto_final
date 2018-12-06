@@ -27,10 +27,10 @@
                     <a href="#categorias" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categorías</a>
                     <ul class="collapse list-unstyled" id="categorias">
                         <li>
-                            <a href="#">Crear</a>
+                            <a href="{{url('/cateagregar')}}">Crear</a>
                         </li>
                         <li>
-                            <a href="#">Mostrar</a>
+                            <a href="{{url('/categorias')}}">Mostrar</a>
                         </li>
                     </ul>
 
@@ -67,7 +67,6 @@
 
         <!-- Page Content Holder -->
         <div id="content">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
@@ -99,20 +98,31 @@
             </nav>
             
             <div class="row justify-content-md-center">
-              @foreach($consulta as $c)
-              <div class="card text-center" style="background-color: white; width: 20rem; float: left">
-                <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Card image cap" width: 20rem;">
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-header text-white bg-dark mb-3">Actualizar Categoría</div>
+                    <div class="card-body">
+                        <form class="login" method="POST" action="{{ url('/cateeditar/'.$categorias->id) }}">
+                          {{csrf_field()}}
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Escribe tu nombre" name="nombre" value="{{$categorias->nombre}}">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Descripcion</label>
+                            <textarea type="text" class="form-control" id="exampleInputEmail1" placeholder="Escribe la descripcion de la categoria" name="descripcion" >{{$categorias->descripcion}}</textarea>
+                          </div>
+                          @if(Session::has("Mensaje"))        
+                            <div class="alert alert-success" role="alert">
+                              <strong>{{Session::get("Mensaje")}}</strong>
+                            </div>
+                          @endif
+                          <button type="reset" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+                          <button type="submit" class="btn btn-success">Modificar</button> 
+                        </form>
+                     </div>
+                </div>      
               </div>
-              <div class="card" style="width: 20rem;">
-                <div class="card-body" style="float: right;">
-                  <h5 class="card-title">{{ $c->nombre }}</h5>
-                  <p>Código: {{ $c->prodid }}.</p>
-                  <p class="card-text">Descripción: {{ $c->descripcion }}.</p>
-                  <p>Categoría: {{ $c->catenombre }}.</p>
-                  <a href="#" class="btn btn-primary" id="volver"  onclick="history.back()" ><i class="fas fa-arrow-left"></i></a>
-                </div>
-              </div>
-              @endforeach
             </div>
         </div>
     </div>
@@ -129,11 +139,7 @@
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
-
-            
         });
-
-
     </script>
 </body>
 </html>
