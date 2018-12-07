@@ -81,5 +81,11 @@ class VentaController extends Controller
 
 		return view("ventas.mostrardetalle", compact("busqueda"));
 	}
+
+	public function eliminar_venta($id)
+	{
+		Venta::destroy($id);
+		return redirect()->route("ventas");
+	}
 }
 

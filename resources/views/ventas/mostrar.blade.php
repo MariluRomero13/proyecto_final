@@ -51,7 +51,7 @@
             <td>{{$v->fecha_venta}}</td>
             <td>{{$v->total}}</td>
             <td><a href="{{ url("/mostrarDetalles/$v->id") }}" class="btn btn-success"><i class="far fa-eye"></i></a></td>
-            <td><a href="#" class="btn btn-danger"><i class="fas fa-times-circle"></i></a></td>
+            <td><a href="{{ url("/eliminarventa/$v->id") }}" class="btn btn-danger"><i class="fas fa-times-circle"></i></a></td>
           </tr>
          @endforeach
         </tbody>

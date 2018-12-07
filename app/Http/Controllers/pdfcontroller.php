@@ -13,7 +13,7 @@ class pdfcontroller extends Controller
     function descargar()
     {
         $total = 0;
-
+        
         $fecha = Carbon::now()->format('y-m-d');
         $dia = Carbon::now()->format('d');
         $mes = Carbon::now()->format('m');

@@ -47,6 +47,7 @@ Route::post("/buscarproductoventa","ProductosController@buscar_producto_inventar
 Route::post("/registrarVenta","VentaController@registrarVenta");
 Route::post("/buscarventa", "VentaController@buscar_venta");
 Route::get("/mostrarDetalles/{id}", "VentaController@mostrar_detalles");
+Route::get("/eliminarventa/{id}","VentaController@eliminar_venta");
 
 //Rutas para el PDF
 Route::get("/bajarPDF", "pdfcontroller@descargar");
