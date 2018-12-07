@@ -68,7 +68,7 @@
                 <td style="border:0;">&nbsp;</td>
                 <td style="border:0;">&nbsp;</td>
                 <td align="right"><strong>TOTAL</strong></td>
-                <td align="right"><span class="text">Total</span></td>
+                <td align="right"><span class="text"><strong>$ {{$total}}</strong></span></td>
             </tr>
         </table>
     </div>

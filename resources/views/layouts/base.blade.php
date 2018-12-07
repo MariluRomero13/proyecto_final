@@ -65,7 +65,7 @@
                     <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reportes</a>
                     <ul class="collapse list-unstyled" id="reportes">
                         <li>
-                            <a href="#">Reportes</a>
+                            <a href="{{url('/bajarPDF')}}">Reportes</a>
                         </li>
                         <li>
                             <a href="#">Gráficas</a>
