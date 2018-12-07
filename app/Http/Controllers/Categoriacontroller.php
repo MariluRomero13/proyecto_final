@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Modelos\Categoria;
 use App\Modelos\Producto;
+use App\Http\Requests\InsertarCategoriaRequest;
 
 class Categoriacontroller extends Controller
 {
     function vista()
     {
-        $categorias = Categoria::with("productos")->get();
+        $categorias = Categoria::paginate(3);
     	return view("categorias.vcategoria", compact("categorias"));
     }
 
@@ -20,7 +21,7 @@ class Categoriacontroller extends Controller
     	return view("categorias.cateagregar", compact("productos"));
     }
 
-    function agregarcate(request $r)
+    function agregarcate(InsertarCategoriaRequest $r)
     {
     	$cat = new Categoria();
     	$cat->nombre = $r->nombre;
@@ -48,5 +49,21 @@ class Categoriacontroller extends Controller
          {        
             return back()->with("Mensaje", "La categoría de ".$cat->nombre." ha sido actualizada");
          }
+    }
+
+    function eliminarcate($id)
+    {  
+        $cate = Categoria::destroy($id);
+        return redirect()->route("viewcategorias");
+    }
+
+    function catalogo($id)
+    {
+        $categorias = Categoria::join("productos","categoria_id","=","categorias.id")
+        ->select("productos.id","productos.nombre","productos.descripcion","productos.imagen")
+        ->where("categorias.id","=",$id)
+        ->paginate(3);
+        //return $categorias;
+        return view("categorias.catalogo", compact("categorias")); 
     }
 }

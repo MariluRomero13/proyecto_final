@@ -15,7 +15,12 @@
     {{ csrf_field() }}
     <div class="form-group">
       <label for="">Nombre de la categoría</label>
-      <input type="text" class="form-control" placeholder="Escribe el nombre de la categoría" name="nombre">
+      <input type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}" placeholder="Escribe el nombre de la categoría" name="nombre">
+      @if ($errors->has('nombre'))
+          <span class="invalid-feedback">
+            <strong>{{ $errors->first('nombre') }}</strong>
+          </span>
+      @endif
     </div>
 
     <div class="form-group">

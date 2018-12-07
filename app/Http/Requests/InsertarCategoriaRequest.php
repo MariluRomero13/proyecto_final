@@ -13,7 +13,7 @@ class InsertarCategoriaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class InsertarCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "nombre" => "required|string",
+            "descripcion"=> "nullable"
         ];
+    }
+
+    public function messages()
+    {
+      return [
+        'nombre.required'=> "Olvidaste ingresar el nombre",
+        'nombre.string' => "Solo se permiten letras"
+        
+      ];
     }
 }

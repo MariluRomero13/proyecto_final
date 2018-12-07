@@ -34,8 +34,6 @@ class ProductosController extends Controller
         return view("productos.verproductos", compact('productos'));
     }
 
-
-
     function seleccionarproducto($id)
     {
 

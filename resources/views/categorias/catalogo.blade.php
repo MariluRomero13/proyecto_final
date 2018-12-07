@@ -13,9 +13,8 @@
     @yield('css')
 </head>
 <body>
-  
 
-    <div class="wrapper">
+<div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -26,7 +25,7 @@
                     <a href="{{ url('inicio') }}" id="inicio">Inicio</a>
                     <a href="#categorias" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categorías</a>
                     <ul class="collapse list-unstyled" id="categorias">
-                       <li>
+                        <li>
                             <a href="{{url('/cateagregar')}}">Crear</a>
                         </li>
                         <li>
@@ -107,21 +106,40 @@
                 </div>
             </nav>
             
-            <div class="row justify-content-md-center">
-              @foreach($consulta as $c)
-              <div class="card text-center" style="background-color: white; width: 20rem; float: left">
-                <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Card image cap" width: 20rem;">
-              </div>
-              <div class="card" style="width: 20rem;">
-                <div class="card-body" style="float: right;">
-                  <h5 class="card-title">{{ $c->nombre }}</h5>
-                  <p>Código: {{ $c->prodid }}.</p>
-                  <p class="card-text">Descripción: {{ $c->descripcion }}.</p>
-                  <p>Categoría: {{ $c->catenombre }}.</p>
+            <div>
+              <div class="form-inline">
+
+                <label class="sr-only" for="inlineFormInputGroupUsername2">Buscar</label>
+                  <div class="input-group mb-2 mr-sm-2">
+                    @csrf
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="buscador" placeholder="Buscar...">
+                  </div>
                   <a href="#" class="btn btn-primary" id="volver"  onclick="history.back()" ><i class="fas fa-arrow-left"></i></a>
-                </div>
               </div>
-              @endforeach
+            </div>
+            <br>
+            <div class="container-fluid" id="ContenidoCartas">
+              <div class="row justify-content-center" id="cuerpo">
+                  @foreach($categorias as $c)
+                    <div class="card" style="width: 17rem; margin-left: 2%;" >
+                      <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Card image cap" class="img-fluid" style="width: 16.5rem; height: 17rem;">
+                      <div class="card-body">
+                        <h5 class="card-title">{{$c->id }} - {{ $c->nombre }}</h5>
+                      </div>
+                      <div class="card-footer">
+                        <a href="{{ url("/seleccionarproducto/$c->id") }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <a href="{{ url("/eliminar/$c->id") }}" class="btn btn-danger"><i class="fas fa-times-circle"></i></a>
+                        <a href="{{ url("vermasproductos/$c->id") }}" class="btn btn-success"><i class="far fa-eye"></i></a>
+                      </div>
+                  </div>
+                  @endforeach
+                  <div id="error"></div>
+              </div>
+              <br>
+              {{ $categorias->links() }}
             </div>
         </div>
     </div>
@@ -131,6 +149,7 @@
     crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="/js/buscarProducto.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -146,3 +165,4 @@
     </script>
 </body>
 </html>
+

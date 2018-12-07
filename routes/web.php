@@ -17,6 +17,8 @@ Route::get("/cateagregar", "categoriacontroller@agregar");
 Route::post("/cateagregar", "categoriacontroller@agregarcate");
 Route::get("/cateeditar/{id_cate}", "categoriacontroller@veditarcate");
 Route::post("/cateeditar/{id}", "categoriacontroller@editarcate");
+Route::get("/cateliminar/{id}", "categoriacontroller@eliminarcate")->name("viewcategorias");
+Route::get("/catalogo/{id}", "categoriacontroller@catalogo")->name("catalogo");
 
 //Rutas De Productos
 Route::get("/viewproductos", "ProductosController@verproductos")->name('viewproductos'); //

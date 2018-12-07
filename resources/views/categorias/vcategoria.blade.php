@@ -5,28 +5,26 @@
 @endsection
 
 @section("contenido")
-<div class="row">
-  @foreach($categorias as $cate)
-     <div class="col-md-4">
-         <div class="card mb-4 text-white bg-dark">
-            <div class="card-body">
-               <h5 class="card-title">{{$cate->nombre}}</h5>
-               <p class="card-text" style="color: white;">{{$cate->descripcion}}</p>
-               <a href="{{url('/cateeditar/'.$cate->id)}}" class="btn btn-block btn-outline-primary btn-sm">Editar</a>
-               <div class="dropdown" style="margin-top: 5px;">
-	               	<a href="" class="btn btn-block btn-outline-success btn-sm dropdown-toggle" id="dropdown1" data-toggle="dropdown">Ver productos</a>
-			        <div class="dropdown-menu">
-			          <div class="dropdown-header">Lista de productos</div>
-				        <ul>
-                @foreach($cate->productos as $prod)
-				          <li>{{$prod->nombre}}</li>
-                @endforeach
-				      	</ul>
-  			        </div>
-        			</div>  
-            </div>
+
+<div class="container-fluid" id="ContenidoCartas">
+  <br>
+  <div class="row justify-content-center" id="cuerpo">
+      @foreach($categorias as $cate)
+        <div class="card text-white bg-dark" style="width: 20rem; margin-left: 2%;" >
+          <div class="card-body">
+            <h5 class="card-title">{{$cate->nombre}}</h5>
+            <p class="card-text text-white">{{$cate->descripcion}}</p>
+            <div class="text-center"><a href="{{ url("/catalogo/$cate->id") }}" class="btn btn-success">Catálogo de productos</a></div>
+          </div>
+
+          <div class="card-footer">
+            <a href="{{ url("/cateeditar/$cate->id") }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+            <a href="{{ url("/cateliminar/$cate->id") }}" class="btn btn-danger"><i class="fas fa-times-circle"></i></a>
           </div>
       </div>
-  @endforeach
+      @endforeach
+  </div>
+  <br>
+  {{ $categorias->render()  }}
 </div>
 @endsection
