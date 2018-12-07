@@ -115,7 +115,7 @@
               <div class="card" style="width: 20rem;">
                 <div class="card-body" style="float: right;">
                   <h5 class="card-title">{{ $c->nombre }}</h5>
-                  <p>Código: {{ $c->prodid }}.</p>
+                  <p>Código: {{ $c->codigo }}.</p>
                   <p class="card-text">Descripción: {{ $c->descripcion }}.</p>
                   <p>Categoría: {{ $c->catenombre }}.</p>
                   <a href="#" class="btn btn-primary" id="volver"  onclick="history.back()" ><i class="fas fa-arrow-left"></i></a>

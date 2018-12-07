@@ -39,7 +39,7 @@ class InventarioController extends Controller
 
     function viewInventario()
     {
-        $inventario = DB::table('productos')->join("inventario" ,"productos.id", "=", "inventario.producto_id")->select("inventario.id as invid", "productos.id as codigo", "productos.nombre", "inventario.stock_actual", "inventario.precio_compra", "inventario.precio_venta")->paginate(4);
+        $inventario = DB::table('productos')->join("inventario" ,"productos.id", "=", "inventario.producto_id")->select("inventario.id as invid","productos.codigo as code", "productos.id as codigo", "productos.nombre", "inventario.stock_actual", "inventario.precio_compra", "inventario.precio_venta")->paginate(4);
         return view("inventario.mostrarInventario", compact("inventario"));
     }
 
@@ -90,11 +90,11 @@ class InventarioController extends Controller
 
     function buscar(Request $r)
     {
-        $busqueda = DB::table('productos')->join("inventario" ,"productos.id", "=", "inventario.producto_id")->select("inventario.id as invid", "productos.id as codigo", "productos.nombre", "inventario.stock_actual", "inventario.precio_compra", "inventario.precio_venta")->where("productos.nombre",'LIKE',"%".$r->get("valor")."%")->get();
+        $busqueda = DB::table('productos')->join("inventario" ,"productos.id", "=", "inventario.producto_id")->select("productos.codigo as code","inventario.id as invid", "productos.id as codigo", "productos.nombre", "inventario.stock_actual", "inventario.precio_compra", "inventario.precio_venta")->where("productos.nombre",'LIKE',"%".$r->get("valor")."%")->get();
 
         if ($r->get("valor") == "") 
         {
-             $todo = DB::table('productos')->join("inventario" ,"productos.id", "=", "inventario.producto_id")->select("inventario.id as invid", "productos.id as codigo", "productos.nombre", "inventario.stock_actual", "inventario.precio_compra", "inventario.precio_venta")->get();
+             $todo = DB::table('productos')->join("inventario" ,"productos.id", "=", "inventario.producto_id")->select("productos.codigo as code","inventario.id as invid", "productos.id as codigo", "productos.nombre", "inventario.stock_actual", "inventario.precio_compra", "inventario.precio_venta")->get();
              return ["status" => 2, "todo" => $todo];
         }
 

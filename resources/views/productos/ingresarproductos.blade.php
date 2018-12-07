@@ -29,10 +29,10 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="CodigoInput">Código</label>
-                    <input name="id" type="number" class="form-control {{ $errors->has('id') ? ' is-invalid' : '' }}" placeholder="Ingrese un código" required value="{{ old('id') }}">
-                    @if ($errors->has('id'))
+                    <input name="codigo" type="number" class="form-control {{ $errors->has('codigo') ? ' is-invalid' : '' }}" placeholder="Ingrese un código" required value="{{ old('codigo') }}">
+                    @if ($errors->has('codigo'))
                         <span class="invalid-feedback">
-                          <strong>{{ $errors->first('id') }}</strong>
+                          <strong>{{ $errors->first('codigo') }}</strong>
                         </span>
                     @endif
 

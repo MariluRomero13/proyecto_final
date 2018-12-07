@@ -28,9 +28,12 @@ class VentaController extends Controller
 	public function registrarVenta(Request $r)
 	{
 		
+		$fecha = Carbon::now(); 
 		$venta = new Venta();
 		$venta->total = $r->get("total");
+		$venta->fecha_venta = $fecha;
 		$venta->save();
+
 		
 		$producto = $r->get("producto");
 		$producto = Collection::make($producto);
@@ -73,7 +76,7 @@ class VentaController extends Controller
 			->join("inventario","producto_id","=","productos.id")
 			->join("detalle_ventas","inventario_id","=","inventario.id")
 			->join("ventas","ventas.id","=","detalle_ventas.venta_id")
-			->select("categorias.nombre as categoria","productos.id as codigo","productos.nombre","inventario.precio_venta","detalle_ventas.cantidad","detalle_ventas.subtotal","ventas.total")
+			->select("categorias.nombre as categoria","productos.codigo as codigo","productos.nombre","inventario.precio_venta","detalle_ventas.cantidad","detalle_ventas.subtotal","ventas.total")
 			->where("ventas.id","=",$id)->get();
 
 		return view("ventas.mostrardetalle", compact("busqueda"));

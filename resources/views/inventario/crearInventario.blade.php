@@ -43,7 +43,7 @@
             <select name="idproducto" class="form-control {{ $errors->has('idproducto') ? ' is-invalid' : '' }}">
               <option selected="selected" value="">Selecciona un producto</option>
               @foreach($productos as $p)
-                <option value="{{$p->id}}">{{ $p->id }} {{$p->nombre}}</option>
+                <option value="{{$p->id}}">{{ $p->codigo }} - {{$p->nombre}}</option>
               @endforeach
             </select>
             @if ($errors->has('idproducto'))

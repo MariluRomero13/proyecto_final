@@ -34,7 +34,7 @@
   <br>
   <div class="row justify-content-md-center">
     <div class="col-12">
-      <table class="table table-responsive" style="background-color: ; color: ;">
+      <table class="table table-responsive-lg table-hove" style="background-color: ; color: ;">
         <thead>
           <tr>
             <th>Folio</th>

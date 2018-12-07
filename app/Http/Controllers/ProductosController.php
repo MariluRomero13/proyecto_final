@@ -29,7 +29,6 @@ class ProductosController extends Controller
 
     function verproductos() //mostrar formulario donde se ven los registros de los productos
     {
-
         $productos = Producto::has('categorias')->paginate(3);
         return view("productos.verproductos", compact('productos'));
     }
@@ -40,7 +39,7 @@ class ProductosController extends Controller
       $cat = Categoria::all();
       $consulta = DB::table('categorias')
       ->join('productos', 'categorias.id',   '=','productos.categoria_id')
-      ->select('categorias.id as cateid', 'categorias.nombre as catenombre','productos.id as prodid','productos.nombre', 'productos.descripcion', 'productos.imagen')
+      ->select('categorias.id as cateid', 'categorias.nombre as catenombre','productos.id as prodid',"productos.codigo",'productos.nombre', 'productos.descripcion', 'productos.imagen')
       ->where('productos.id','=', $id)
       ->get();
 
@@ -60,9 +59,10 @@ class ProductosController extends Controller
         $id = $request->categoria;
         $categoria = Categoria::find($id);
         $Prod = new Producto();
-        $Prod->id = $request->id;
+        $Prod->codigo = $request->get("codigo");
         $Prod->nombre = $request->nombre;
         $Prod->imagen = $photo;
+
         if($request->descripcion == "")
         {
             $Prod->descripcion = "Sin descripcion del articulo";
@@ -112,7 +112,7 @@ class ProductosController extends Controller
     {
         $consulta = DB::table('categorias')
           ->join('productos', 'categorias.id',   '=','productos.categoria_id')
-          ->select('categorias.id as cateid', 'categorias.nombre as catenombre','productos.id as prodid','productos.nombre', 'productos.descripcion', 'productos.imagen')
+          ->select('categorias.id as cateid', 'categorias.nombre as catenombre','productos.id as prodid','productos.nombre', 'productos.descripcion', 'productos.imagen', "productos.codigo")
           ->where('productos.id','=', $id)
           ->get();
           return view("productos.vermas",compact("consulta"));
@@ -121,15 +121,15 @@ class ProductosController extends Controller
     function buscar(Request $r)
     {
         $busqueda = DB::table('categorias')
-            ->join('productos', 'categorias.id',   '=','productos.categoria_id')
-            ->select('productos.id','productos.nombre', 'productos.descripcion', 'productos.imagen')->where("productos.nombre",'LIKE',"%".$r->get("valor")."%")
-            ->orWhere("productos.id",'LIKE',"%".$r->get("valor")."%")->get();
+            ->join('productos', 'categorias.id', '=','productos.categoria_id')
+            ->select('productos.codigo','productos.id','productos.nombre', 'productos.descripcion', 'productos.imagen')->where("productos.nombre",'LIKE',"%".$r->get("valor")."%")
+            ->orWhere("productos.codigo",'LIKE',"%".$r->get("valor")."%")->get();
 
         if ($r->get("valor") == "") 
         {
              $todo= DB::table('categorias')
-            ->join('productos', 'categorias.id',   '=','productos.categoria_id')
-            ->select('productos.id','productos.nombre', 'productos.descripcion', 'productos.imagen')->get();
+            ->join('productos', 'categorias.id', '=','productos.categoria_id')
+            ->select('productos.codigo','productos.id','productos.nombre', 'productos.descripcion', 'productos.imagen')->get();
              return ["status" => 2, "todo" => $todo];
         }
 
@@ -144,9 +144,9 @@ class ProductosController extends Controller
     {
         $productos = DB::table("productos")
             ->join("inventario","producto_id", "=","productos.id")
-            ->select("inventario.id as invid","productos.id as codigo","productos.nombre","inventario.stock_actual as stock",
+            ->select("inventario.id as invid","productos.codigo as codi","productos.id as codigo","productos.nombre","inventario.stock_actual as stock",
                 "inventario.precio_venta as precio")
-            ->where("productos.id","=",$r->get("valor"))
+            ->where("productos.codigo","=",$r->get("valor"))
             ->where("inventario.stock_actual",">","0")->get();
         
         return ["status"=> 1, "productos"=> $productos];

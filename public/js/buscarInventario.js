@@ -18,7 +18,7 @@ $(document).ready(function() {
               
               $.each(response.inventario, function(i, v) {
                  td += "<tr>"
-                 td +=("<td>"+v.codigo+"</td>");
+                 td +=("<td>"+v.code+"</td>");
                  td +=("<td>"+v.nombre+"</td>");
                  td +=("<td>"+v.stock_actual+"</td>");
                  td +=("<td>"+v.precio_compra+"</td>");
@@ -36,7 +36,7 @@ $(document).ready(function() {
               
               $.each(response.todo, function(i, v) {
                  td += "<tr>"
-                 td +=("<td>"+v.codigo+"</td>");
+                 td +=("<td>"+v.code+"</td>");
                  td +=("<td>"+v.nombre+"</td>");
                  td +=("<td>"+v.stock_actual+"</td>");
                  td +=("<td>"+v.precio_compra+"</td>");

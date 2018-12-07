@@ -60,7 +60,7 @@ class Categoriacontroller extends Controller
     function catalogo($id)
     {
         $categorias = Categoria::join("productos","categoria_id","=","categorias.id")
-        ->select("productos.id","productos.nombre","productos.descripcion","productos.imagen")
+        ->select("productos.codigo","productos.id","productos.nombre","productos.descripcion","productos.imagen")
         ->where("categorias.id","=",$id)
         ->paginate(3);
         //return $categorias;
