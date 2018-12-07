@@ -14,12 +14,17 @@ class pdfcontroller extends Controller
     {
         $total = 0;
 
-        $fecha = Carbon::now();
-    	$ventas = DB::select('call generar_corte("'.$fecha->format('y-m-d').'")'); 
+        $fecha = Carbon::now()->format('y-m-d');
+        $dia = Carbon::now()->format('d');
+        $mes = Carbon::now()->format('m');
+        $ano = Carbon::now()->format('y');
+    	$ventas = collect(DB::select('call generar_corte("'.$fecha.'")')); 
+        $folio = $ano.$mes.$dia.$ventas->first()->id.$ventas->last()->id;
         foreach ($ventas as $tot) {
             $total += $tot->subtotal;
         }
-    	$pdf = PDF::loadView("PDF.pdfprueba", compact("ventas", "fecha", "total"));
-    	return $pdf->download("Reporte_ventas_".$fecha->format('y-m-d').".pdf");
+        
+    	$pdf = PDF::loadView("PDF.pdfprueba", compact("ventas", "dia", "mes", "ano", "total", "folio"));
+    	return $pdf->download("Reporte_ventas_".$fecha.".pdf");
     }
 }

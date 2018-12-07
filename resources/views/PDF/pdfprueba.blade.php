@@ -23,7 +23,7 @@
                             <td height="40" align="center" class="border fondo"><span class="h1">Corte de caja</span></td>
                         </tr>
                         <tr>
-                            <td height="70" align="center" class="border">001- Nº <span class="text">Folio</span></td>
+                            <td height="70" align="center" class="border">{{$folio}}- Nº <span class="text">Folio</span></td>
                         </tr>
                     </table>
                 </td>
@@ -38,9 +38,9 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td align="center" class="border"><span class="text">{{$fecha->format('d')}}</span></td>
-                <td align="center" class="border"><span class="text">{{$fecha->format('m')}}</span></td>
-                <td align="center" class="border"><span class="text">{{$fecha->format('y')}}</span></td>
+                <td align="center" class="border"><span class="text">{{$dia}}</span></td>
+                <td align="center" class="border"><span class="text">{{$mes}}</span></td>
+                <td align="center" class="border"><span class="text">{{$ano}}</span></td>
             </tr>
         </table>
         <table width="100%" class="tabla3">
