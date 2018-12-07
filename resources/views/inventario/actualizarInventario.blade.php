@@ -54,10 +54,19 @@
                      <a href="#ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ventas</a>
                     <ul class="collapse list-unstyled" id="ventas">
                         <li>
-                            <a href="#">Crear</a>
+                            <a href="{{ url('/crearventas') }}">Crear</a>
                         </li>
                         <li>
-                            <a href="#">Mostrar</a>
+                            <a href="{{ url('/mostrarventas') }}">Mostrar</a>
+                        </li>
+                    </ul>
+                    <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reportes</a>
+                    <ul class="collapse list-unstyled" id="reportes">
+                        <li>
+                            <a href="#">Reportes</a>
+                        </li>
+                        <li>
+                            <a href="#">Gráficas</a>
                         </li>
                     </ul>
                 </li>

@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta http-equiv="Expires" content="0" />
     <meta http-equiv="Pragma" content="no-cache" />
-	<title>Sistema de ventas MRCJ</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="shortcut icon" href="imagenes/icono.png">
-
-    <link rel="stylesheet" href="{{'css/styles.css'}}">
+  <title>Sistema de ventas MRCJ</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="shortcut icon" href="/imagenes/icono.png">
+    <link rel="stylesheet" href="{{"/css/styles.css"}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
  
     @yield('css')
 </head>
 <body>
-	
 
     <div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <img class="img-fluid rounded mx-auto d-block" src="imagenes/logo.png" alt="MRCJ Logo" style="width: 100px; margin-bottom: 5%;">
+                <img class="img-fluid rounded mx-auto d-block" src="/imagenes/logo.png" alt="MRCJ Logo" style="width: 100px; margin-bottom: 5%;">
             </div>
             <ul class="list-unstyled components">
                 <li>
@@ -28,10 +26,10 @@
                     <a href="#categorias" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categorías</a>
                     <ul class="collapse list-unstyled" id="categorias">
                         <li>
-                            <a href="{{url('/cateagregar')}}">Crear</a>
+                            <a href="#">Crear</a>
                         </li>
                         <li>
-                            <a href="{{url('/categorias')}}">Mostrar</a>
+                            <a href="#">Mostrar</a>
                         </li>
                     </ul>
 
@@ -71,6 +69,7 @@
                             <a href="#">Gráficas</a>
                         </li>
                     </ul>
+                    
                 </li>
             </ul>
         </nav>
@@ -90,15 +89,66 @@
                         <i class="fas fa-align-justify"></i>
                     </button>
 
-                    @yield('menu')
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="nav navbar-nav ml-auto">
+                          @if(Session::has("usuario"))
+                              <li class="nav-item active">
+                                  <a class="nav-link" href="#">Activo: {{ Session::get("usuario") }}</a>
+                              </li>
+                          @endif
+                          <li class="nav-item">
+                              <form action="{{ url('logout') }}" method="POST">
+                                  {{ csrf_field() }}
+                                  <button class="btn btn-danger" type="submit">Salir</button>
+                              </form>
+                          </li>
+                      </ul>
+                  </div>
                 </div>
             </nav>
             
-            @yield('contenido')
-        </div>
-    </div>
-
-
+            
+                <div class="row justify-content-md-center">
+                  <div class="col-12">
+                    <a href="#" class="btn btn-primary" id="volver"  onclick="history.back()" ><i class="fas fa-arrow-left"></i></a><br><br>
+                    <table class="table table-responsive-lg table-hover">
+                      <thead>
+                        <tr>
+                          <th>Código</th>
+                          <th>Nombre</th>
+                          <th>Categoría</th>
+                          <th>Precio de venta</th>
+                          <th>Cantidad comprada</th>
+                          <th>Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody id="cuerpo">
+                       @foreach($busqueda as $b)
+                        <tr> 
+                          <td>{{$b->codigo}}</td>           
+                          <td>{{$b->nombre}}</td>
+                          <td>{{$b->categoria}}</td>
+                          <td class="text-center">${{$b->precio_venta}}</td>
+                          <td class="text-center">{{$b->cantidad}}</td>
+                          <td class="text-center">${{$b->subtotal}}</td>
+                        </tr>
+                       @endforeach
+                      </tbody>
+                      <tfoot>
+                        <th>Total</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><h5 id="total">${{ $b->total }}</h5></th>
+                      </tfoot>
+                    </table>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
     <script
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -114,14 +164,7 @@
             });
         });
     </script>
-
-    <script type="text/javascript">
-        /*{
-            if(history.forward(1))
-                location.replace(history.forward(1))
-        }*/
-    </script>
-
-    @yield("javascript")
 </body>
 </html>
+
+

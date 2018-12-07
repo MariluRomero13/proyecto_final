@@ -14,9 +14,9 @@ Route::get("/inicio","PanelController@index")->name('panel');
 //Rutas de categoria
 Route::get("/categorias", "categoriacontroller@vista");
 Route::get("/cateagregar", "categoriacontroller@agregar");
-Route::POST("/cateagregar", "categoriacontroller@agregarcate");
+Route::post("/cateagregar", "categoriacontroller@agregarcate");
 Route::get("/cateeditar/{id_cate}", "categoriacontroller@veditarcate");
-Route::POST("/cateeditar/{id}", "categoriacontroller@editarcate");
+Route::post("/cateeditar/{id}", "categoriacontroller@editarcate");
 
 //Rutas De Productos
 Route::get("/viewproductos", "ProductosController@verproductos")->name('viewproductos'); //
@@ -43,6 +43,8 @@ Route::get("/mostrarventas","VentaController@mostrar_ventas")->name("ventas");
 Route::get("/crearventas","VentaController@index")->name("crearventas");
 Route::post("/buscarproductoventa","ProductosController@buscar_producto_inventario");
 Route::post("/registrarVenta","VentaController@registrarVenta");
+Route::post("/buscarventa", "VentaController@buscar_venta");
+Route::get("/mostrarDetalles/{id}", "VentaController@mostrar_detalles");
 
 //Rutas para el PDF
 Route::get("/bajarPDF", "pdfcontroller@descargar");

@@ -29,6 +29,7 @@ $(document).ready(function() {
                  td += "</tr>"
               });
               tabla.html(td);
+              
             }
             if (response.status == 2) 
             { 
