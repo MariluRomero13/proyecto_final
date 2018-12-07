@@ -43,3 +43,6 @@ Route::get("/mostrarventas","VentaController@mostrar_ventas")->name("ventas");
 Route::get("/crearventas","VentaController@index")->name("crearventas");
 Route::post("/buscarproductoventa","ProductosController@buscar_producto_inventario");
 Route::post("/registrarVenta","VentaController@registrarVenta");
+
+//Rutas para el PDF
+Route::get("/bajarPDF", "pdfcontroller@descargar");

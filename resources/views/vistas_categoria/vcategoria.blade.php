@@ -5,6 +5,9 @@
 @endsection
 
 @section("contenido")
+<div class="container">
+  <a href="{{url('/bajarPDF')}}"><button type="button" class="btn btn-success">Imprimir reporte de venta</button></a>
+</div>
 <div class="row">
   @foreach($categorias as $cate)
      <div class="col-md-4">
