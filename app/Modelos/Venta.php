@@ -13,6 +13,6 @@ class Venta extends Model
     
     public function detalle_ventas()
     {
-    	return $this->hasMany(DetalleVentas::class,'ventas_id','id');
+    	return $this->hasMany(DetalleVenta::class,'venta_id','id');
     }
 }
