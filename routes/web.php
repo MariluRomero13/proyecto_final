@@ -51,3 +51,6 @@ Route::get("/eliminarventa/{id}","VentaController@eliminar_venta");
 
 //Rutas para el PDF
 Route::get("/bajarPDF", "pdfcontroller@descargar");
+
+//Rutas para las graficas
+Route::get("/vergrafica", "graficascontroller@generar");
