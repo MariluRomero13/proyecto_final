@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Http\Requests\InsertarProductoRequest;
 use App\Http\Requests\ActualizarProductoRequest;
+use Storage;
 
 class ProductosController extends Controller
 {
