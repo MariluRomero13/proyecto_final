@@ -110,7 +110,7 @@
             <div class="row justify-content-md-center">
               @foreach($consulta as $c)
               <div class="card text-center" style="background-color: white; width: 20rem; float: left">
-                <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Card image cap" width: 20rem;">
+                <img class="card-img-top" src="/storage/ImgProductos/{{$c->imagen}}" alt="Card image cap" width: 20rem;">
               </div>
               <div class="card" style="width: 20rem;">
                 <div class="card-body" style="float: right;">
