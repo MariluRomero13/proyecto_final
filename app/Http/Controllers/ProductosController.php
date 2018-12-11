@@ -46,20 +46,15 @@ class ProductosController extends Controller
         return view('productos.actualizarproductos', compact('consulta','cat'));
     }
 
-    //InsertarProductoRequest
-    function registrarproducto(Request $request)
+
+    function registrarproducto(InsertarProductoRequest $request)
     {
         
-    	//$info = $request->imagen;
-        //$photo = $request->file('file')->getClientOriginalName();
-        //$destination = base_path().'/public/imagenes/imagenes_productos';
-        //$request->file('file')->move($destination, $photo);
-        
-        return $archivo = $request->file("file");
+    	$info = $request->imagen;
+        $photo = $request->file('imagen')->getClientOriginalName();
         $destination = base_path().'/public/imagenes/imagenes_productos';
-        $nombrearchivo= substr(uniqid(), 1,5).$archivo->getClientOriginalName();
-        return $archivo->move($ruta,$nombrearchivo);
-
+        $request->file('imagen')->move($destination, $photo);
+        
 
         $id = $request->categoria;
         $categoria = Categoria::find($id);
