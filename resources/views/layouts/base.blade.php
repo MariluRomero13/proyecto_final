@@ -68,7 +68,7 @@
                             <a href="{{url('/bajarPDF')}}">Reportes</a>
                         </li>
                         <li>
-                            <a href="#">Gráficas</a>
+                            <a href="{{url('/vergrafica')}}">Gráficas</a>
                         </li>
                     </ul>
                 </li>
