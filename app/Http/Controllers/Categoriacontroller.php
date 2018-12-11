@@ -51,11 +51,6 @@ class Categoriacontroller extends Controller
          }
     }
 
-    function eliminarcate($id)
-    {  
-        $cate = Categoria::destroy($id);
-        return redirect()->route("viewcategorias");
-    }
 
     function catalogo($id)
     {

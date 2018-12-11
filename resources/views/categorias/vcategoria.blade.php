@@ -19,7 +19,6 @@
 
           <div class="card-footer">
             <a href="{{ url("/cateeditar/$cate->id") }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-            <a href="{{ url("/cateliminar/$cate->id") }}" class="btn btn-danger"><i class="fas fa-times-circle"></i></a>
           </div>
       </div>
       @endforeach

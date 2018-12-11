@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section("css")
+<link rel="stylesheet" href="css/dropzone.css">
+@endsection
+
 @section("menu")
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
@@ -72,6 +76,14 @@
                     </span>
                   @endif
                 </div>
+
+                <div class="form-group dropzone" id="my-dropzone">
+                  <div class="fallback">
+                    <input type="file" name="file">
+                  </div>
+                  <button class="btn btn-dark" id="btn1">Subir</button>
+                </div>
+              
                 <button type="reset" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
                 <button type="submit" class="btn btn-success">Registrar</button> 
               </form>
@@ -81,6 +93,31 @@
         </div>
     </div>
   </div>
+@endsection
+
+@section("javascript")
+<script src="js/dropzone.js"></script>
+<script>
+    Dropzone.options.myDropzone = {
+      
+      url: "/registrarproducto",
+      method: "POST",
+      uploadMultiple: false,
+      autoProcessQueue: false,
+      autoDiscover: false,
+      init: function()
+      {
+        var myDropzone = this;
+        $("#btn1").click(function(e) {
+
+          e.preventDefault();
+          e.stopPropagation();
+          myDropzone.processQueue();
+        });
+      }
+    }
+  </script>
+
 @endsection
 
 
