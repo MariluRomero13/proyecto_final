@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Http\Requests\InsertarProductoRequest;
 use App\Http\Requests\ActualizarProductoRequest;
+use Storage;
 
 class ProductosController extends Controller
 {
@@ -49,12 +50,17 @@ class ProductosController extends Controller
 
     function registrarproducto(InsertarProductoRequest $request)
     {
+
+    	//$info = $request->imagen;
+        //$photo = $request->file('imagen')->getClientOriginalName();
+        //$destination = base_path().'/public/imagenes/imagenes_productos';
+        //$request->file('imagen')->move($destination, $photo);
         
-    	$info = $request->imagen;
-        $photo = $request->file('imagen')->getClientOriginalName();
-        $destination = base_path().'/public/imagenes/imagenes_productos';
-        $request->file('imagen')->move($destination, $photo);
-        
+
+        $File = $request->file('imagen');
+        $Extencion = $File->getClientOriginalExtension();
+        $photo = uniqid().random_int(1000, 9999).".".$Extencion;
+        Storage::disk('Imagen_Productos')->putFileAs('/', $File, $photo); 
 
         $id = $request->categoria;
         $categoria = Categoria::find($id);
@@ -89,10 +95,10 @@ class ProductosController extends Controller
         $prodmod->descripcion = $request->descripcion;
         if ($request->imagen) 
         {
-            $info = $request->imagen;
-            $photo = $request->file('imagen')->getClientOriginalName();
-            $destination = base_path().'/public/imagenes/imagenes_productos';
-            $request->file('imagen')->move($destination, $photo);
+            $File = $request->file('imagen');
+            $Extencion = $File->getClientOriginalExtension();
+            $photo = uniqid().random_int(1000, 9999).".".$Extencion;
+            Storage::disk('Imagen_Productos')->putFileAs('/', $File, $photo); 
             $prodmod->imagen = $photo;
         }
 
