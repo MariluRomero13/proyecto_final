@@ -76,7 +76,7 @@
           	
           	<br>
           	<div class="col-md-10">
-          		<table class="table table-responsive table-hover" style="background-color: ; color: ;">
+          		<table class="table table-responsive table-responsive-lg table-hover">
 			        <thead>
 			          <tr>
 			            <th>Opciones</th>
@@ -112,7 +112,7 @@
 @endsection
 
 @section("javascript")
-	<script src="js/ventas.js"></script>
+	<script src="js/venta.js"></script>
 	<script src="js/main.js"></script>
 @endsection
 
