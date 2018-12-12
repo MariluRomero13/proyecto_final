@@ -171,6 +171,7 @@ var contador = 0;
 						divmensaje.html("<div class='alert alert-success text-center' role='alert'>"+"<strong>"+response.venta+"</strong>"+"</div>");
 
 						divmensaje.delay(4000).hide(600);
+						return redirect()->route("/ticket");
 					}
 					
 				});

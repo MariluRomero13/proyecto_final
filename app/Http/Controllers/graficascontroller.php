@@ -19,8 +19,10 @@ class graficascontroller extends Controller
 
 	function generar_grafica()
 	{
-		$consulta = collect(DB::select('select date_format(ventas.fecha_venta, "%d") as dia, sum(detalle_ventas.subtotal) as total from detalle_ventas inner join ventas on detalle_ventas.venta_id = 
-		ventas.id group by date_format(ventas.fecha_venta, "%d")'));
+	$consulta = collect(DB::select('
+select tabla.dia, tabla.total from (select date_format(ventas.fecha_venta, "%d") as dia, sum(detalle_ventas.subtotal) as total from detalle_ventas inner join ventas on detalle_ventas.venta_id = 
+ventas.id group by date_format(ventas.fecha_venta, "%d") order by ventas.fecha_venta desc limit 4) as tabla order by tabla.dia;'));
+	
 		$dias = collect([]);
 		$totales = collect([]);
 		$consulta->each(function($r, $i)use($dias, $totales){
