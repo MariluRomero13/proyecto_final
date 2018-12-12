@@ -12,10 +12,15 @@ use DB;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 use Barryvdh\DomPDF\Facade as PDF;
+use Response;
 
 
 class VentaController extends Controller
 {	
+	function __construct()
+    {
+         $this->middleware('verificador');
+    }
 	public function mostrar_ventas()
 	{
 		$ventas = Venta::paginate(5);
@@ -30,37 +35,40 @@ class VentaController extends Controller
 	public function registrarVenta(Request $r)
 	{
 		
+		//dd($r);
 		$fecha = Carbon::now(); 
 		$venta = new Venta();
 		$venta->total = $r->get("total");
 		$venta->fecha_venta = $fecha;
 		$venta->save();
 
-		
-		$producto = $r->get("producto");
-		$producto = Collection::make($producto);
-
 		$id_venta = Venta::all();
-		$producto->each(function ($i,$k)use($id_venta){	
+		
+		$producto = $r->get("pro");
+		$producto = Collection::make($producto);
+		$precio_venta = $r->get("precio_v");
+		$cantidad = $r->get("cantidad");
+		$subtotal = $r->get("subtotal");
+
+		for ($i=0; $i < $producto->count() ; $i++) { 
 			$dv = new DetalleVenta();
 			$dv->venta_id = $id_venta->last()->id;
-            $dv->inventario_id = $i[0];
-			$dv->cantidad = $i[3];
-			$dv->precio_venta = $i[2];
-			$dv->subtotal = $i[4];
+            $dv->inventario_id = $producto[$i];
+			$dv->cantidad = $cantidad[$i];
+			$dv->precio_venta = $precio_venta[$i];
+			$dv->subtotal = $subtotal[$i];
 			$dv->save();
-        });
-        
+		}
+
+
         $ticket = DB::select("call generar_ticket(".$id_venta->last()->id.")");
         $total = Venta::all()->where("id", "=", $id_venta->last()->id)->first()->total;
         $fecha = Carbon::now()->format('d-m-y');
         $pdf = PDF::LoadView("PDF.ticket", compact("ticket", "total", "fecha"));
-        return $pdf->Output("filename.pdf",'FD');
-        return ["venta"=>"Venta registrada satisfactoriamente", $pdf->Output("filename.pdf",'FD')];
-
-		return ["venta"=>"Venta registrada satisfactoriamente"];
-		
-		
+        return $pdf->download($id_venta->last()->id."ticket.pdf");
+        
+        
+	
 	}
 
 	public function buscar_venta(Request $r)

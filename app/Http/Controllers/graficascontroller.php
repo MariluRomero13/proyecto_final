@@ -11,6 +11,10 @@ use RezaAr\Highcharts\Facade as Chart;
 
 class graficascontroller extends Controller
 {
+	function __construct()
+    {
+         $this->middleware('verificador');
+    }
 	function generar()
 	{
 		$grafica =  $this->generar_grafica();

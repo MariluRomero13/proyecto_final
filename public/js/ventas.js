@@ -2,6 +2,11 @@ var subtotal = [];
 var total = 0;
 var arreglo = [];
 var contador = 0;
+var producto = $("#producto");
+var precio_v = $("#precio_v");
+var stock_a = $("#stock_a");
+var inventarioid = 0;
+var tabla = $("#cuerpo");
 
 function eliminar(index)
 {
@@ -14,26 +19,57 @@ function eliminar(index)
 }
 function habilitar()
 {
-	if (total > 0) 
+	if (total > 0 && $("#efectivo").val() != "") 
 	{
-		$("#guardar").show();
+		$("#registrar").prop( "disabled", false );
+		$("#cancelar").prop( "disabled", false );
+		
 	}
 	else {
-		$("#guardar").hide();
+		$("#registrar").prop( "disabled", true );
+		$("#cancelar").prop( "disabled", true );
+		
 		
 	}
 }
+function limpiar()
+{
+	producto.val("");
+	precio_v.val("");
+	$("#cantidad").val("");
+	stock_a.val("");
+	$("#codigo").val("");
+}
+
+	   
+function ocultar()
+{
+	if ($("#codigo").val() == "") 
+	{
+		$("#agregar").prop( "disabled", true );
+		$("#cantidad").prop( "disabled", true );
+	}
+	else {
+		$("#agregar").prop( "disabled", false );
+		$("#cantidad").prop( "disabled", false );
+		
+	}
+}
+function cancelar()
+{
+	limpiar();
+	ocultar();
+	total = 0;
+	subtotal = [];
+	arreglo = [];
+	contador = 0;
+	habilitar();
+	tabla.html("");
+	$("#total").html("$ 0.0");
+}
 $(document).ready(function($) {
 
-	var producto = $("#producto");
-	var precio_v = $("#precio_v");
-	var stock_a = $("#stock_a");
-	var inventarioid = 0;
-	var tabla = $("#cuerpo");
-
 	
-		 
-
 	$( "#codigo" ).keypress(function( event ) {
 		  var codigo = $(this).val();
 		  var token = $("input[name=_token]").val();
@@ -75,8 +111,9 @@ $(document).ready(function($) {
 
 
 	
-	$("#guardar").hide();
-	$("#agregar").hide();
+	$("#cancelar").prop( "disabled", true );
+	$("#registrar").prop( "disabled", true );
+	$("#agregar").prop( "disabled", true );
 	$("#cantidad").prop( "disabled", true );
 
 	function agregar()
@@ -112,6 +149,7 @@ $(document).ready(function($) {
 
 				contador++;
 				$("#total").html("$ " + total);
+				$("input[name=total]").val(total);
 				limpiar();
 				habilitar();
 				arreglo.push([inventarioid,pro,pv,cantidad,sub]);
@@ -124,43 +162,9 @@ $(document).ready(function($) {
 		}
 	}
 
-	function limpiar()
-	{
-		producto.val("");
-		precio_v.val("");
-		$("#cantidad").val("");
-		stock_a.val("");
-		$("#codigo").val("");
-	}
-
+	
 
 	
-	function ocultar()
-	{
-		if ($("#codigo").val() == "") 
-		{
-			$("#agregar").hide();
-			$("#cantidad").prop( "disabled", true );
-		}
-		else {
-			$("#agregar").show();
-			$("#cantidad").prop( "disabled", false );
-			
-		}
-	}
-
-	function cancelar()
-	{
-		limpiar();
-		ocultar();
-		total = 0;
-		subtotal = [];
-		arreglo = [];
-		contador = 0;
-		habilitar();
-		tabla.html("");
-		$("#total").html("$ 0.0");
-	}
 
 	$("#limpiar").click(function(event) {
 		limpiar();
@@ -173,25 +177,36 @@ $(document).ready(function($) {
 	});
 
 	$("#registrar").click(function(event) {
-		$("#totalp").html("Holaaaa");
+		if ($("#efectivo").val() == "") 
+		{
+			alert("Ingresa el efectivo");
+		}
 	});
 
-	$("#vender").click(function(event) {
-		var token = $("input[name=_token]").val();
-		var divmensaje = $("#mensaje");
-		$.ajax({
-			url: "/registrarVenta",
-			data: {_token: token, "producto": arreglo, "total": total},
-			type: "POST",
-			datatype: "json",
-			success: function(response)
-			{
-				cancelar();
-				divmensaje.html("<div class='alert alert-success text-center' role='alert'>"+"<strong>"+val+"</strong>"+"</div>");
-				divmensaje.delay(4000).hide(600);
-			}
-			
-		});
+	
+
+	$("#efectivo").keypress(function( event ) {
+		//alert("Hi");
+		var efectivo = $(this).val();
+		var cambio = $("#cambio");
+	  	var cambio2 = 0;
+
+		  if ( event.which == 13 )
+		  {
+	     		efectivo = parseFloat(efectivo);
+	     		if (efectivo <  total) 
+	     		{
+	     			alert("Le falta efectivo");
+	     		}
+	     		
+	     		else {
+	     			cambio2 = efectivo - total ;
+	     			cambio.html("Cambio: $"+cambio2);
+	     			habilitar();
+	     		}
+	     		
+		  }
+		 
 	});
 	
 	

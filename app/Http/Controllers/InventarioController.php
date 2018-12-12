@@ -19,6 +19,10 @@ use App\Http\Requests\ActualizarInventarioRequest;
 
 class InventarioController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('verificador');
+    }
     function viewRegistrarInventario()
     {
     	$productos = Producto::doesnthave("inventario")->get();

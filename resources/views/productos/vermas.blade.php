@@ -26,7 +26,7 @@
                     <a href="{{ url('inicio') }}" id="inicio">Inicio</a>
                     <a href="#categorias" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categorías</a>
                     <ul class="collapse list-unstyled" id="categorias">
-                       <li>
+                        <li>
                             <a href="{{url('/cateagregar')}}">Crear</a>
                         </li>
                         <li>
@@ -64,10 +64,10 @@
                     <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reportes</a>
                     <ul class="collapse list-unstyled" id="reportes">
                         <li>
-                            <a href="#">Reportes</a>
+                            <a href="{{url('/bajarPDF')}}">Reportes</a>
                         </li>
                         <li>
-                            <a href="#">Gráficas</a>
+                            <a href="{{url('/vergrafica')}}">Gráficas</a>
                         </li>
                     </ul>
                 </li>

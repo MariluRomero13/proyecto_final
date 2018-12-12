@@ -19,5 +19,5 @@
 @endsection
 
 @section("contenido")
-    <div><h3>Holaa</h3></div>
+    <div><h3 class="text-center">Bienvenido</h3></div>
 @endsection

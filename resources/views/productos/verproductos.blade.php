@@ -37,8 +37,6 @@
       @foreach($productos as $pro)
         <div class="card" style="width: 17rem; margin-left: 2%;" >
 
-          <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$pro->imagen"}}" alt="Card image cap" class="img-fluid" style="width: 16.5rem; height: 17rem;">
-
           <img class="card-img-top" src="storage/ImgProductos/{{$pro->imagen}}" alt="Card image cap" class="img-fluid" style="width: 16.8rem; height: 17rem;">
 
           <div class="card-body">
@@ -59,7 +57,8 @@
 @endsection
 
 @section("javascript")
-  <script src="js/buscarProductos.js"></script>
+<script src="js/buscar.js"></script>
+  
 @endsection
 
 

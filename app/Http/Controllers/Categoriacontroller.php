@@ -9,6 +9,10 @@ use App\Http\Requests\InsertarCategoriaRequest;
 
 class Categoriacontroller extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('verificador');
+    }
     function vista()
     {
         $categorias = Categoria::paginate(3);

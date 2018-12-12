@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class pdfcontroller extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('verificador');
+    }
     function descargar()
     {
         $total = 0;
