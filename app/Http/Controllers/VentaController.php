@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class VentaController extends Controller
 {	
@@ -49,7 +51,15 @@ class VentaController extends Controller
 			$dv->save();
         });
         
+        $ticket = DB::select("call generar_ticket(".$id_venta->last()->id.")");
+        $total = Venta::all()->where("id", "=", $id_venta->last()->id)->first()->total;
+        $fecha = Carbon::now()->format('d-m-y');
+        $pdf = PDF::LoadView("PDF.ticket", compact("ticket", "total", "fecha"));
+        return $pdf->Output("filename.pdf",'FD');
+        return ["venta"=>"Venta registrada satisfactoriamente", $pdf->Output("filename.pdf",'FD')];
+
 		return ["venta"=>"Venta registrada satisfactoriamente"];
+		
 		
 	}
 

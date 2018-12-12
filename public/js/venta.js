@@ -17,8 +17,6 @@ function habilitar()
 	if (total > 0) 
 	{
 		$("#guardar").show();
-		
-
 	}
 	else {
 		$("#guardar").hide();
@@ -164,8 +162,21 @@ $(document).ready(function($) {
 		$("#total").html("$ 0.0");
 	}
 
+	$("#limpiar").click(function(event) {
+		limpiar();
+		ocultar();
+
+	});
+
+	$("#si").click(function(event) {
+		cancelar();
+	});
+
 	$("#registrar").click(function(event) {
-		
+		$("#totalp").html("Holaaaa");
+	});
+
+	$("#vender").click(function(event) {
 		var token = $("input[name=_token]").val();
 		var divmensaje = $("#mensaje");
 		$.ajax({
@@ -176,21 +187,11 @@ $(document).ready(function($) {
 			success: function(response)
 			{
 				cancelar();
-				divmensaje.html("<div class='alert alert-success text-center' role='alert'>"+"<strong>"+response.venta+"</strong>"+"</div>");
-
+				divmensaje.html("<div class='alert alert-success text-center' role='alert'>"+"<strong>"+val+"</strong>"+"</div>");
 				divmensaje.delay(4000).hide(600);
 			}
 			
 		});
-	});
-
-	$("#limpiar").click(function(event) {
-		limpiar();
-		ocultar();
-
-	});
-	$("#si").click(function(event) {
-		cancelar();
 	});
 	
 	

@@ -34,6 +34,6 @@ class pdfcontroller extends Controller
         $total = Venta::all()->where("id", "=", 2)->first()->total;
         $fecha = Carbon::now()->format('d-m-y');
         $pdf = PDF::LoadView("PDF.ticket", compact("ticket", "total", "fecha"));
-        return $pdf->download("hola.pdf");
+        return ["pdf" => $pdf->download("hola.pdf"), "venta"=>"Venta registrada satisfactoriamente"];
     }
 }
