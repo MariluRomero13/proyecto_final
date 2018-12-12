@@ -53,3 +53,6 @@ Route::get("/bajarPDF", "pdfcontroller@descargar");
 
 //Rutas para las graficas
 Route::get("/vergrafica", "graficascontroller@generar");
+
+//Rutas para tickets
+Route::get("/ticket", "pdfcontroller@ticket");

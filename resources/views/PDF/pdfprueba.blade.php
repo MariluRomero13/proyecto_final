@@ -23,7 +23,7 @@
                             <td height="40" align="center" class="border fondo"><span class="h1">Corte de caja</span></td>
                         </tr>
                         <tr>
-                            <td height="70" align="center" class="border">{{$folio}}- Nº <span class="text">Folio</span></td>
+                            <td height="70" align="center" class="border">{{$folio}} Nº <span class="text">Folio</span></td>
                         </tr>
                     </table>
                 </td>
