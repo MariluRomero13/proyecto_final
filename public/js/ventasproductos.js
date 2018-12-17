@@ -19,7 +19,7 @@ function eliminar(index)
 }
 function habilitar()
 {
-	if (total > 0 && $("#efectivo").val() != "") 
+	if (total > 0) 
 	{
 		$("#registrar").prop( "disabled", false );
 		$("#cancelar").prop( "disabled", false );
@@ -36,7 +36,7 @@ function limpiar()
 {
 	producto.val("");
 	precio_v.val("");
-	$("#cantidad").val("");
+	$("#cantidad").val(1);
 	stock_a.val("");
 	$("#codigo").val("");
 }
@@ -164,7 +164,21 @@ $(document).ready(function($) {
 
 	
 
-	
+	$("#registrar").click(function(event) {
+		$("#totalv").html("Total: $"+total);
+
+	});
+
+	$("#cerrar").click(function(event) {
+		cancelar();
+		limpiar();
+		habilitar();
+		ocultar();
+		$("#efectivo").val(0);
+		$("#totalv").html("Total: $0.0");
+		$("#cambio").html("Cambio: $0.0");
+
+	});
 
 	$("#limpiar").click(function(event) {
 		limpiar();
@@ -173,10 +187,10 @@ $(document).ready(function($) {
 	});
 
 	$("#si").click(function(event) {
-		cancelar();
+		//cancelar();
 	});
 
-	$("#registrar").click(function(event) {
+	$("#vender").click(function(event) {
 		if ($("#efectivo").val() == "") 
 		{
 			alert("Ingresa el efectivo");
@@ -185,29 +199,29 @@ $(document).ready(function($) {
 
 	
 
-	$("#efectivo").keypress(function( event ) {
+	$("#calcular").click(function( event ) {
 		//alert("Hi");
-		var efectivo = $(this).val();
+		var efectivo = $("#efectivo").val();
 		var cambio = $("#cambio");
 	  	var cambio2 = 0;
 
-		  if ( event.which == 13 )
-		  {
-	     		efectivo = parseFloat(efectivo);
-	     		if (efectivo <  total) 
-	     		{
-	     			alert("Le falta efectivo");
-	     		}
+ 		efectivo = parseFloat(efectivo);
+ 		total = parseFloat(total);
+ 		if (efectivo <  total) 
+ 		{
+ 			alert("Le falta efectivo");
+ 			$("#vender").prop( "disabled", true );
+ 		}
+ 		
+ 		else 
+ 		{
+ 			cambio2 = efectivo - total ;
+ 			cambio.html("Cambio: $"+cambio2);
+ 			$("#vender").prop( "disabled", false );
+ 			
+ 		}
 	     		
-	     		else {
-	     			cambio2 = efectivo - total ;
-	     			cambio.html("Cambio: $"+cambio2);
-	     			habilitar();
-	     		}
-	     		
-		  }
-		 
 	});
 	
 	
-});
+});	

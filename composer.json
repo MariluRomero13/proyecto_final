@@ -11,7 +11,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-        "muhamadrezaar/highcharts": "dev-master"
+        "muhamadrezaar/highcharts": "dev-master",
+        "spatie/flysystem-dropbox": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

@@ -24,23 +24,6 @@
 
 @section('contenido')
 
-<div id="miModal" class="modal">
-	<div class="flex" id="flex">
-		<div class="contenido-modal">
-			<div class="modal-header flex">
-				<span class="close" id="close">&times;</span>
-			</div>
-			<div class="modal-body">
-				<p class="text-center cancelar font-weight-normal">¿Estás seguro de cancelar?</p>			
-			</div>
-			<div class="footer text-right">
-				<button class="btn btn-success" id="si">Si</button>
-				<button class="btn btn-danger" id="no">No</button>
-			</div>
-		</div>
-	</div>
-</div>
-
 
 <div class="row justify-content-md-center">
     <div class="col-10">
@@ -51,33 +34,27 @@
       <div class="card-body">
           {{ csrf_field() }}
           	<div class="form-row">
-	          	<div class="form-group col-md-4">
+	          	<div class="form-group col-md-6">
 	              <label for="codigo">Código</label>
 	              <input id="codigo" type="number" class="form-control">
 	            </div>
-	        	<div class="form-group col-md-4">
+	        	<div class="form-group col-md-6">
 	              <label for="producto">Producto</label>
 	              <input id="producto" type="text" class="form-control" disabled>
 	            </div>
-	            <div class="form-group col-md-4">
+        	</div>
+        	<div class="form-row">
+        		<div class="form-group col-md-4">
 	              <label for="precio_v">Precio</label>
 	              <input id="precio_v" type="text" class="form-control" disabled>
 	            </div>
-        	</div>
-        	<div class="form-row">
-        		
 		        <div class="form-group col-md-4">
 		            <label for="stock_a">Stock</label>
 		            <input id="stock_a" type="text" class="form-control" disabled>
 		        </div>
 		        <div class="form-group col-md-4">
 		            <label for="cantidad">Cantidad</label>
-		            <input  type="number" class="form-control " id="cantidad" placeholder="Ingrese la cantidad">
-		        </div>
-		        <div class="form-group col-md-4">
-		            <label for="efectivo">Efectivo</label>
-		            <input  type="number" class="form-control " id="efectivo" placeholder="Ingrese el efectivo">
-		            <label for="cambio" id="cambio">Cambio $0.0</label>
+		            <input  type="number" class="form-control " id="cantidad" placeholder="Ingrese la cantidad" value="1">
 		        </div>
 	    	</div>
 	      	<button type="reset" class="btn btn-primary" id="limpiar"><i class="fas fa-trash-alt"></i></button>
@@ -111,11 +88,34 @@
 			        </tfoot>
 		    	</table>
 	        </div>
+	        <div id="miModal" class="modal">
+				<div class="flex" id="flex">
+					<div class="contenido-modal">
+						<div class="modal-header flex">
+							<span class="close" id="close">&times;</span>
+						</div>
+						<div class="modal-body">
+							<div class="form-group col-md-12">
+								<label for="efectivo">Efecetivo:</label>
+					            <input  type="number" class="form-control " id="efectivo" placeholder="Ingrese el efectivo">
+					            <a href="#" class="btn btn-info" style="margin-top: 1%;" id="calcular"><i class="fas fa-calculator"></i></a><br>
+					            <label for="totalv" id="totalv" style="margin-top: 2%;">Total: $0.0</label>
+					            <label for="cambio" id="cambio" style="margin-top: 2%; margin-left: 2%;">Cambio $0.0</label>
+					        </div>	
+						</div>
+						<div class="footer text-right">
+							<button type="submit" class="btn btn-success" id="vender" disabled>Vender</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
 	        <div id="guardar">
-	        	<button type="button" class="btn btn-secondary" id="cancelar" diasable>Cerrar</button>
-	        	<button type="submit" class="btn btn-success" id="registrar" diasable>Registrar</button>
+	        	<button type="button" class="btn btn-secondary" id="cerrar" diasable>Cerrar</button>
+	        	<button type="button" class="btn btn-success" id="registrar" diasable>Registrar</button>
 	        </div>
-          	</form>
+	        
+          	
           
          	<div id="mensaje"></div>
         </div>
@@ -125,7 +125,7 @@
 @endsection
 
 @section("javascript")
-	<script src="js/ventas.js"></script>
-	<script src="js/main.js"></script>
+<script src="/js/principal.js"></script>
+<script src="/js/ventasproductos.js"></script>
 @endsection
 

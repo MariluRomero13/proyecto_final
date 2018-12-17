@@ -69,6 +69,11 @@ return [
             'root' => storage_path('app/public/ImgProductos'),
         ],
 
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'authorizationToken' => env('DROPBOX_TOKEN')
+        ],
+
     ],
 
 ];

@@ -56,3 +56,7 @@ Route::get("/vergrafica", "graficascontroller@generar");
 
 //Rutas para tickets
 Route::get("/ticket", "pdfcontroller@ticket");
+
+//rutas de archivos
+Route::get("/mostrarFormArchivo", "ArchivoController@index");
+Route::post("/archivar", "ArchivoController@archivar");

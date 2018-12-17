@@ -125,7 +125,7 @@
               <div class="row justify-content-center" id="cuerpo">
                   @foreach($categorias as $c)
                     <div class="card" style="width: 17rem; margin-left: 2%;" >
-                      <img class="card-img-top" src="{{"/imagenes/imagenes_productos/$c->imagen"}}" alt="Card image cap" class="img-fluid" style="width: 16.5rem; height: 17rem;">
+                      <img class="card-img-top" src="/storage/ImgProductos/{{$c->imagen}}" alt="Card image cap" class="img-fluid" style="width: 16.5rem; height: 17rem;">
                       <div class="card-body">
                         <h5 class="card-title">{{$c->codigo }} - {{ $c->nombre }}</h5>
                       </div>
